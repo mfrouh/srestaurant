@@ -17,6 +17,7 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->foreignId('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

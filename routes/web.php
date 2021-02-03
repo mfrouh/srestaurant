@@ -20,5 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-
+Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
+   Route::resource('category', 'Backend\CategoryController');
+   Route::resource('coupon', 'Backend\CouponController');
+   Route::resource('menu', 'Backend\MenuController');
+   Route::resource('offer', 'Backend\OfferController');
+   Route::resource('product', 'Backend\ProductController');
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
