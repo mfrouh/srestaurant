@@ -17,7 +17,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.coupon.index');
     }
 
     /**

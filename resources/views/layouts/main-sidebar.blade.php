@@ -23,40 +23,16 @@
 				</div>
 				<ul class="side-menu">
 					<li class="slide">
-						<a class="side-menu__item" href="{{ url('/dashboard' ) }}"><span class="side-menu__label">الرئيسية</a>
+						<a class="side-menu__item" href="{{ route('dashboard.index') }}"><span class="side-menu__label">الرئيسية</a>
                     </li>
                    {{--  @can('الوظائف')  --}}
                     <li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">الوظائف</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-                         {{--  @can('الوظائف')  --}}
-					     <li class="slide">
-					     	<a class="side-menu__item" href="{{ url('/roles' ) }}"><span class="side-menu__label">الوظائف</a>
-                         </li>
-                         {{--  @endcan
-                         @can('انشاء وظيفة')  --}}
-                         <li class="slide">
-					     	<a class="side-menu__item" href="{{ url('/roles/create' ) }}"><span class="side-menu__label">انشاء وظيفة</a>
-                         </li>
-                         {{--  @endcan  --}}
-                        </ul>
+					     	<a class="side-menu__item" href="{{ route('roles.index') }}"><span class="side-menu__label">الوظائف</a>
                     </li>
-                    {{--  @endcan  --}}
+
                     {{--  @can('الصلاحيات')  --}}
                     <li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">الصلاحيات</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-                         {{--  @can('الصلاحيات')  --}}
-					     <li >
 					     	<a class="side-menu__item" href="{{ route('permissions.index') }}"><span class="side-menu__label">الصلاحيات</a>
-                         </li>
-                         {{--  @endcan
-                         @can('انشاء صلاحية')  --}}
-                         <li >
-					     	<a class="side-menu__item" href="{{ url('/permissions/create' ) }}"><span class="side-menu__label">انشاء صلاحية</a>
-                         </li>
-                         {{--  @endcan  --}}
-                       </ul>
                     </li>
                     {{--  @endcan  --}}
 					<li class="slide">
@@ -82,71 +58,38 @@
                     </li>
                     {{--  @can('الاقسام')  --}}
                     <li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">الاقسام</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-					       {{--  @can('الاقسام')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/category' ) }}"><span class="side-menu__label">الاقسام</a>
-                           </li>
-                           {{--  @endcan
-                           @can('انشاء قسم')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/category/create' ) }}"><span class="side-menu__label">انشاء قسم</a>
-                           </li>
-                           {{--  @endcan  --}}
-                        </ul>
+					       	<a class="side-menu__item" href="{{ route('category.index' ) }}"><span class="side-menu__label">الاقسام</a>
                     </li>
                     {{--  @endcan  --}}
-                     {{--  @can('المنتجات')  --}}
-                     <li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">المنتجات</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-					       {{--  @can('المنتجات')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/product' ) }}"><span class="side-menu__label">المنتجات</a>
-                           </li>
-                           {{--  @endcan
-                           @can('انشاء منتج')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/product/create' ) }}"><span class="side-menu__label">انشاء منتج</a>
-                           </li>
-                           {{--  @endcan  --}}
-                        </ul>
-                    </li>
                     <li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">الخصومات</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-					       {{--  @can('الخصومات')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/coupon' ) }}"><span class="side-menu__label">الخصومات</a>
-                           </li>
-                           {{--  @endcan
-                           @can('انشاء خصم')  --}}
-					       <li>
-					       	<a class="side-menu__item" href="{{ url('/coupon/create' ) }}"><span class="side-menu__label">انشاء خصم</a>
-                           </li>
-                           {{--  @endcan  --}}
-                        </ul>
-                    </li>
-                    <li class="slide">
-						<a class="side-menu__item" href="{{ url('/offer' ) }}"><span class="side-menu__label">العروض</a>
-                    </li>
-                    <li class="slide">
-						<a class="side-menu__item" href="{{ url('/orders' ) }}"><span class="side-menu__label">الطلبات</a>
-                    </li>
-                    <li class="slide">
-						<a class="side-menu__item" href="{{ url('/tags' ) }}"><span class="side-menu__label">كلمات لها علاقة</a>
-                    </li>
-                    <li class="slide">
-						<a class="side-menu__item" href="{{ url('/reviews' ) }}"><span class="side-menu__label">الأراء</a>
+						<a class="side-menu__item" href="{{ route('menu.index' ) }}"><span class="side-menu__label">القوائم</a>
 					</li>
+                     {{--  @can('المنتجات')  --}}
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{ route('product.index' ) }}"><span class="side-menu__label">المنتجات</a>
+                    </li>
+                    <li class="slide">
+					    <a class="side-menu__item" href="{{ route('coupon.index' ) }}"><span class="side-menu__label">الخصومات</a>
+                    </li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('offer.index' ) }}"><span class="side-menu__label">العروض</a>
+                    </li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('order.index' ) }}"><span class="side-menu__label">الطلبات</a>
+                    </li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('tag.index' ) }}"><span class="side-menu__label">كلمات لها علاقة</a>
+                    </li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('review.index' ) }}"><span class="side-menu__label">الأراء</a>
+                    </li>
                     {{--  @endcan  --}}
 					{{--  @can('تعديل الموقع')  --}}
 					<li class="slide">
-						<a class="side-menu__item" href="{{ url('/setting' ) }}"><span class="side-menu__label">الاعدادات</a>
+						<a class="side-menu__item" href="{{ route('setting.index' ) }}"><span class="side-menu__label">الاعدادات</a>
 					</li>
 					{{--  @endcan  --}}
 				</ul>
 			</div>
 		</aside>
-<!-- main-sideba
+<!-- main-sidebar -->

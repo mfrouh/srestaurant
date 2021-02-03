@@ -26,5 +26,16 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('menu', 'Backend\MenuController');
    Route::resource('offer', 'Backend\OfferController');
    Route::resource('product', 'Backend\ProductController');
+   Route::resource('permissions', 'Backend\PermissionController');
+   Route::resource('roles', 'Backend\RoleController');
+   Route::resource('tag', 'Backend\TagController');
+   Route::resource('order', 'Backend\OrderController');
+   Route::get('/setting', 'Backend\SettingController@index')->name('setting.index');
+   Route::post('/setting', 'Backend\SettingController@store')->name('setting.store');
+   Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
+   Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
+
+
+
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

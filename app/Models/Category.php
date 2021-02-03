@@ -31,4 +31,12 @@ class Category extends Model
     {
       return asset('category/'.$this->slug);
     }
+    public function ScopeActive($q)
+    {
+     return  $q->where('status','active');
+    }
+    public function ScopeInActive($q)
+    {
+      return  $q->where('status','inactive');
+    }
 }
