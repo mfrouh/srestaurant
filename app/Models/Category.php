@@ -15,6 +15,13 @@ class Category extends Model
 
     protected $appends=['path'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            $model->slug = str_replace(' ','_',$model->name);
+        });
+    }
     public function products()
     {
       return $this->hasMany(Product::class);

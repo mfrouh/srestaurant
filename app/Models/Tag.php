@@ -17,6 +17,14 @@ class Tag extends Model
 
     protected $hidden=['created_at','updated_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            $model->slug = str_replace(' ','_',$model->name);
+        });
+    }
+
     public function products()
     {
         return $this->morphedByMany(Product::class, 'taggable');
