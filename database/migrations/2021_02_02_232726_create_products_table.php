@@ -18,6 +18,12 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image')->default('images/products/1.png');
+            $table->string('video_url')->nullable();
+            $table->text('description');
+            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->decimal('price');
+            $table->integer('quantity');
+            $table->string('sku')->unique();
             $table->foreignId('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('menu_id');

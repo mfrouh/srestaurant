@@ -15,6 +15,11 @@ class CreateVariantsTable extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('sku')->unique();
+            $table->decimal('price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

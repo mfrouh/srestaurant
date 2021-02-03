@@ -17,6 +17,15 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('status',['Pending','Shipped','Delivered','Processing']);
+            $table->dateTime('delivery_time')->nullable();
+            $table->decimal('total_price');
+            $table->integer('discount');
+            $table->string('payment_id');
+            $table->string('address');
+            $table->string('street');
+            $table->string('phone_number');
+            $table->string('note_for_driver')->nullable();
             $table->timestamps();
         });
     }

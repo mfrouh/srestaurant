@@ -15,6 +15,13 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->unique();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('type',['fixed','variable']);
+            $table->integer('value');
+            $table->string('message')->nullable();
+            $table->dateTime('start_offer');
+            $table->dateTime('end_offer');
             $table->timestamps();
         });
     }
