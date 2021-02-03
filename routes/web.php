@@ -16,12 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', function(Request $request)
-{
-    Image::make($request->photo)->resize(300, 200)->save('foo.jpg');
+Route::get('/', function () {
+    return view('welcome');
 });
 Auth::routes();
 
