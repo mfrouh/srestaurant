@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateOfferRequest;
+use App\Http\Requests\EditOfferRequest;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,7 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOfferRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class OfferController extends Controller
      * @param  \App\Models\Offer  $offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Offer $offer)
+    public function update(EditOfferRequest $request, Offer $offer)
     {
         //
     }

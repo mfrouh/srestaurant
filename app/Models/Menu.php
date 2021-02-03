@@ -11,7 +11,7 @@ class Menu extends Model
 
     protected $table='menus';
 
-    protected $fillable=['name','slug'];
+    protected $fillable=['name','slug','status'];
 
     protected $appends=['path'];
 

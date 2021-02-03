@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateMenuRequest;
+use App\Http\Requests\EditMenuRequest;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,7 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateMenuRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(EditMenuRequest $request, Menu $menu)
     {
         //
     }

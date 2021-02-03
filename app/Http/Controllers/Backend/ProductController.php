@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\EditProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(EditProductRequest $request, Product $product)
     {
         //
     }

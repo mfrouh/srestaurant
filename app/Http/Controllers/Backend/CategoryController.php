@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\EditCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.category.index');
     }
 
     /**
@@ -34,9 +35,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+      return Category::create($request->validated());
+
     }
 
     /**
@@ -68,9 +70,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(EditCategoryRequest $request, Category $category)
     {
-        //
+      return  $category->update($request->validated());
     }
 
     /**
