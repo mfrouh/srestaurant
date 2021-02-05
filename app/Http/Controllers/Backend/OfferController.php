@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOfferRequest;
 use App\Http\Requests\EditOfferRequest;
+use App\Models\Menu;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OfferController extends Controller
 {
@@ -15,8 +17,20 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Offer::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editoffer"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.offer.index');
     }
 
@@ -38,7 +52,8 @@ class OfferController extends Controller
      */
     public function store(CreateOfferRequest $request)
     {
-        //
+        Offer::create($request->validated());
+        return response()->json(['data'=>'success created'],200);
     }
 
     /**
@@ -49,7 +64,7 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        //
+        return response()->json(['data'=>$offer],200);
     }
 
     /**
@@ -72,7 +87,8 @@ class OfferController extends Controller
      */
     public function update(EditOfferRequest $request, Offer $offer)
     {
-        //
+        $offer->update($request->validated());
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -83,6 +99,7 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
+        return response()->json(['data'=>'success deleted'],200);
     }
 }

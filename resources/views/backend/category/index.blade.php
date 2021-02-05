@@ -3,7 +3,7 @@
  الاقسام
 @endsection
 @section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/datatables.css')}}">
 @endsection
 @section('page-header')
   <!-- breadcrumb -->
@@ -39,7 +39,7 @@
 <x-editcategory />
 @endsection
 @section('js')
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -120,7 +120,4 @@
        });
    });
   </script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-    <script src="/vendor/datatables/buttons.server-side.js"></script>
 @endsection

@@ -15,7 +15,7 @@
 @endsection
 @section('content')
                 <!-- row opened -->
-<form action="/change-password" method="post">
+<form action="{{route('change-password.store')}}" method="post">
  @csrf
  <div class="row row-sm">
  	<div class="col-xl-8">

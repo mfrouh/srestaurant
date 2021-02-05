@@ -7,6 +7,7 @@ use App\Http\Requests\CreateCouponRequest;
 use App\Http\Requests\EditCouponRequest;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CouponController extends Controller
 {
@@ -15,8 +16,20 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Coupon::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcoupon"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.coupon.index');
     }
 
@@ -38,7 +51,8 @@ class CouponController extends Controller
      */
     public function store(CreateCouponRequest $request)
     {
-        //
+       Coupon::create($request->validated());
+       return response()->json(['data'=>'success created'],200);
     }
 
     /**
@@ -49,7 +63,7 @@ class CouponController extends Controller
      */
     public function show(Coupon $coupon)
     {
-        //
+        return response()->json(['data'=>$coupon],200);
     }
 
     /**
@@ -72,7 +86,8 @@ class CouponController extends Controller
      */
     public function update(EditCouponRequest $request, Coupon $coupon)
     {
-        //
+        $coupon->update($request->validated());
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -83,6 +98,7 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
-        //
+        $coupon->delete();
+        return response()->json(['data'=>'success deleted'],200);
     }
 }

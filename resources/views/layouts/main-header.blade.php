@@ -63,9 +63,9 @@
 											</div>
 										</div>
 									</div>
-									<a class="dropdown-item" href="/dashboard"><i class="bx bx-user-circle"></i>الرئيسية</a>
-									<a class="dropdown-item" href="/change-password"><i class="bx bx-cog"></i> تغير كلمة السر</a>
-									<a class="dropdown-item" href="/profile-setting"><i class="bx bx-slider-alt"></i> الاعدادات</a>
+									<a class="dropdown-item" href="{{route('dashboard.index')}}"><i class="bx bx-user-circle"></i>الرئيسية</a>
+									<a class="dropdown-item" href="{{route('change-password.index')}}"><i class="bx bx-cog"></i> تغير كلمة السر</a>
+									<a class="dropdown-item" href="{{route('profile-setting.index')}}"><i class="bx bx-slider-alt"></i> الاعدادات</a>
 									<a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

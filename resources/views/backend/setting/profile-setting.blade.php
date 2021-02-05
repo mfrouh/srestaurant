@@ -15,7 +15,7 @@
 @endsection
 @section('content')
                 <!-- row opened -->
-<form action="/profile-setting" method="post" enctype="multipart/form-data">
+<form action="{{route('profile-setting.store')}}" method="post" enctype="multipart/form-data">
  @csrf
  <div class="row row-sm">
  	<div class="col-xl-8">
@@ -28,14 +28,14 @@
  			<div class="card-body">
                 <div class="form-group">
                     <label for="">الاسم</label>
-                    <input type="text" name="name" class="form-control  @error('name') is-invalid @enderror" value="{{auth()->guard('admin')->user()->name}}"  placeholder="الاسم" required>
+                    <input type="text" name="name" class="form-control  @error('name') is-invalid @enderror" value="{{auth()->user()->name}}"  placeholder="الاسم" required>
                     @error('name')
                     <small id="helpId" class="text-muted">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="">البريد الالكتروني</label>
-                    <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror" value="{{auth()->guard('admin')->user()->email}}" placeholder="البريد الالكتروني" required>
+                    <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror" value="{{auth()->user()->email}}" placeholder="البريد الالكتروني" required>
                     @error('email')
                     <small id="helpId" class="text-muted">{{$message}}</small>
                     @enderror
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for=""> الصورة الشخصية</label>
                     <input type="file" name="image" class="@error('image') is-invalid @enderror">
-                    <img src="{{asset(auth()->guard('admin')->user()->image)}}"  height="100px" width="100px">
+                    <img src="{{asset(auth()->user()->image)}}"  height="100px" width="100px">
                     @error('image')
                     <small id="helpId" class="text-muted">{{$message}}</small>
                     @enderror

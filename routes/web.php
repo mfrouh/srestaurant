@@ -35,6 +35,10 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('order', 'Backend\OrderController');
    Route::get('/setting', 'Backend\SettingController@index')->name('setting.index');
    Route::post('/setting', 'Backend\SettingController@store')->name('setting.store');
+   Route::get('/change-password', 'Backend\ChangepasswordController@index')->name('change-password.index');
+   Route::post('/change-password', 'Backend\ChangepasswordController@store')->name('change-password.store');
+   Route::get('/profile-setting', 'Backend\ProfilesettingController@index')->name('profile-setting.index');
+   Route::post('/profile-setting', 'Backend\ProfilesettingController@store')->name('profile-setting.store');
    Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 
