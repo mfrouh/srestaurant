@@ -17,7 +17,9 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "yajra/laravel-datatables": "1.5",
+        "yajra/laravel-datatables-oracle": "^9.15"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

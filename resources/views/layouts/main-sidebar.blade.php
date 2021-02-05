@@ -34,28 +34,6 @@
                     <li class="slide">
 					     	<a class="side-menu__item" href="{{ route('permissions.index') }}"><span class="side-menu__label">الصلاحيات</a>
                     </li>
-                    {{--  @endcan  --}}
-					<li class="slide">
-                        <a class="side-menu__item" href="#" data-toggle="slide"><span class="side-menu__label">المستخدمين</span><i class="angle fe fe-chevron-down"></i></a>
-                        <ul class="slide-menu">
-                            {{-- @can('المستخدمين') --}}
-					        <li>
-                               <a class="side-menu__item"  href="{{ url('/users') }}"><span class="side-menu__label">المستخدمين</a>
-					        </li>
-                            {{-- @endcan
-                            @can('الموظفين') --}}
-					        <li>
-                               <a class="side-menu__item"  href="{{ url('/employee') }}"><span class="side-menu__label">الموظفين</a>
-					        </li>
-                            {{-- @endcan
-                            @can('انشاء موظف') --}}
-					        <li>
-                               <a class="side-menu__item"  href="{{ url('/employee/create') }}"><span class="side-menu__label">انشاء موظف</a>
-					        </li>
-					        {{-- @endcan --}}
-
-                        </ul>
-                    </li>
                     {{--  @can('الاقسام')  --}}
                     <li class="slide">
 					       	<a class="side-menu__item" href="{{ route('category.index' ) }}"><span class="side-menu__label">الاقسام</a>

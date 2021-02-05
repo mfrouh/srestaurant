@@ -21,6 +21,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
+
+
+
    Route::resource('category', 'Backend\CategoryController');
    Route::resource('coupon', 'Backend\CouponController');
    Route::resource('menu', 'Backend\MenuController');

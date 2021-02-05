@@ -42,7 +42,7 @@
                 @yield('content')
                 @include('layouts.message')
 				@include('layouts.sidebar')
-				@include('layouts.models')
+				{{-- @include('layouts.models') --}}
             	{{--  @include('layouts.footer')  --}}
                 @include('layouts.footer-scripts')
 	</body>

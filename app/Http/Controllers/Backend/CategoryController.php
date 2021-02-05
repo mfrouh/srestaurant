@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\EditCategoryRequest;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
@@ -14,8 +17,20 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Category::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcategory"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.category.index');
     }
 
@@ -37,8 +52,8 @@ class CategoryController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
-      return Category::create($request->validated());
-
+       Category::create($request->validated());
+       return response()->json(['data'=>'success created'],200);
     }
 
     /**
@@ -49,7 +64,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+       return response()->json(['data'=>$category],200);
     }
 
     /**
@@ -72,7 +87,8 @@ class CategoryController extends Controller
      */
     public function update(EditCategoryRequest $request, Category $category)
     {
-      return  $category->update($request->validated());
+      $category->update($request->validated());
+      return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -83,6 +99,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+       $category->delete();
+       return response()->json(['data'=>'success deleted'],200);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\CreateMenuRequest;
 use App\Http\Requests\EditMenuRequest;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class MenuController extends Controller
 {
@@ -15,8 +16,20 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Menu::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editmenu"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.menu.index');
     }
 
@@ -38,7 +51,9 @@ class MenuController extends Controller
      */
     public function store(CreateMenuRequest $request)
     {
-        //
+        Menu::create($request->validated());
+        return response()->json(['data'=>'success created'],200);
+
     }
 
     /**
@@ -49,7 +64,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        return response()->json(['data'=>$menu],200);
     }
 
     /**
@@ -72,7 +87,8 @@ class MenuController extends Controller
      */
     public function update(EditMenuRequest $request, Menu $menu)
     {
-        //
+        $menu->update($request->validated());
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -83,6 +99,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return response()->json(['data'=>'success deleted'],200);
     }
 }
