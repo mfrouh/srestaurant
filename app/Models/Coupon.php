@@ -11,7 +11,7 @@ class Coupon extends Model
 
     protected $fillable=['code','start','end','cand','cand_value','type','value','message','times'];
 
-    protected $appends=['isactive','activestatus','atype','acand'];
+    protected $appends=['isactive','activestatus','atype','acand','eend','sstart'];
 
     protected $dates=['start','end'];
 
@@ -37,7 +37,15 @@ class Coupon extends Model
     }
     public function getActivestatusAttribute()
     {
-      return   $this->isactive==1?'متاح الان':'غير متاح الان';
+      return $this->isactive==1?'متاح الان':'غير متاح الان';
+    }
+    public function getEendAttribute()
+    {
+      return $this->end->format('Y-m-d\TH:i');
+    }
+    public function getSstartAttribute()
+    {
+      return $this->start->format('Y-m-d\TH:i');
     }
     public function ScopeActive($q)
     {
@@ -47,4 +55,6 @@ class Coupon extends Model
     {
        $q->OrWhere('start','>', now())->OrWhere('end','<',now());
     }
+
+   
 }

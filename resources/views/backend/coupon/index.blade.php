@@ -57,7 +57,7 @@
           columns: [
               {data: 'id', name: 'id'},
               {data: 'code', name: 'code'},
-              {data: 'activestatus', name: 'status'},
+              {data: 'activestatus', name: 'status', orderable: false, searchable: false},
               {data: 'atype', name: 'type'},
               {data: 'value', name: 'value'},
               {data: 'times', name: 'times'},
@@ -120,6 +120,12 @@
             $('#emessage').val(response.data.message);
             $('#evalue').val(response.data.value);
             $('#eid').val(response.data.id);
+            $("#etype").val(response.data.type);
+            $("#ecand").val(response.data.cand);
+            $("#eend").val(response.data.eend);
+            $("#estart").val(response.data.sstart);
+            $("#etimes").val(response.data.times);
+            $("#ecand_value").val(response.data.cand_value);
             $('#editcoupon').modal('toggle');
            }
        });

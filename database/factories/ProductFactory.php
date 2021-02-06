@@ -26,7 +26,7 @@ class ProductFactory extends Factory
         return [
             'category_id'=>Category::all()->random()->id,
             'menu_id'=>Menu::all()->random()->id,
-            'name'=>$this->faker->name,
+            'name'=>$this->faker->name.rand(1,5000),
             'description'=>$this->faker->realText(200,2),
             'price'=>rand(1,200),
             'status'=>$this->faker->randomElement(['active','inactive']),

@@ -62,7 +62,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'category_name', name: 'category_id'},
                 {data: 'menu_name', name: 'menu_id'},
-                {data: 'status', name: 'status'},
+                {data: 'stat', name: 'status'},
                 {data: 'price', name: 'price'},
                 {data: 'quantity', name: 'quantity'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},

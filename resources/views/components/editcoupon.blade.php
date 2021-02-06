@@ -12,7 +12,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">نوع الخصم</label>
-                            <select name="type" class="form-control">
+                            <select name="type" class="form-control" id="etype">
                                 <option value="fixed">ثابت</option>
                                 <option value="variable">متغير</option>
                             </select>
@@ -25,12 +25,12 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">قيمة الخصم</label>
-                            <input type="text" name="value" class="form-control" value="{{old('value')}}" placeholder="قيمة الخصم" >
+                            <input type="text" name="value" class="form-control" id="evalue" placeholder="قيمة الخصم" >
                             <small  class="text-muted"></small>
                         </div>
                         <div class="form-group col-6">
                             <label for="">عددالمرات</label>
-                            <select name="times" class="form-control">
+                            <select name="times" class="form-control" id="etimes">
                                @for ($i = 1; $i < 10; $i++)
                                 <option value="{{$i}}" {{old('times')==$i?'selected':''}}>{{$i}}</option>
                                @endfor
@@ -39,17 +39,17 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">بداية الخصم</label>
-                            <input type="datetime-local" name="start" class="form-control " value="{{old('start')}}" placeholder="" >
+                            <input type="datetime-local" name="start" class="form-control " id="estart" >
                             <small  class="text-muted"></small>
                         </div>
                         <div class="form-group col-6">
                             <label for="">نهاية الخصم</label>
-                            <input type="datetime-local" name="end" class="form-control  " value="{{old('end')}}" placeholder="" >
+                            <input type="datetime-local" name="end" class="form-control  " id="eend" >
                             <small  class="text-muted"></small>
                         </div>
                         <div class="form-group col-6">
                             <label for="">الشرط</label>
-                            <select name="cand" class="form-control  @error('cand') is-invalid @enderror">
+                            <select name="cand" id="ecand" class="form-control">
                                 <option value="">اختار نوع الشرط</option>
                                 <option value="more" {{old('cand')=='more'?'selected':''}}>اكبر</option>
                                 <option value="less" {{old('cand')=='less'?'selected':''}}>اقل</option>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">قيمة شرط الخصم</label>
-                            <input type="text" name="cand_value" class="form-control" value="{{old('cand_value')}}" placeholder="قيمة شرط الخصم" >
+                            <input type="text" name="cand_value" class="form-control" id="ecand_value" placeholder="قيمة شرط الخصم" >
                             <small  class="text-muted"></small>
                         </div>
                         <div class="form-group text-center col-12">

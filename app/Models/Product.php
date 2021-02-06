@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $fillable=['category_id','menu_id','name','description','price','status','slug','sku','image','video_url','quantity'];
 
-    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer','category_name','menu_name'];
+    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer','stat','category_name','menu_name'];
 
     public static function boot()
     {
@@ -44,7 +44,7 @@ class Product extends Model
     {
       return  $q->where('status','inactive');
     }
-    public function getstatus()
+    public function getstatAttribute()
     {
       return  $this->status=="active"?'مفعل':'مغلق';
     }

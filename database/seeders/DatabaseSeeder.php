@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                 \App\Models\Category::factory(10)->create();
                 \App\Models\Menu::factory(10)->create();
                 \App\Models\Coupon::factory(10)->create();
-                \App\Models\Product::factory(100)->create();
+                \App\Models\Product::factory(5000)->create();
 
 
 
