@@ -33,8 +33,8 @@
         </table>
     </div>
   </div>
-  {{-- <x-createpermission/>
-  <x-editpermission/> --}}
+  <x-createpermission/>
+  <x-editpermission/>
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
@@ -61,5 +61,58 @@
           }
       });
    };
+   $('#cpermission').submit(function (e) {
+       e.preventDefault();
+       var data=$('#cpermission').serialize();
+      $.ajax({
+          type: "post",
+          url: "{{route('permissions.store')}}",
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            $('#createpermission').modal('toggle');
+            $('.data-table').DataTable().ajax.reload();
+          }
+        });
+   });
+   $('#epermission').submit(function (e) {
+       e.preventDefault();
+      var data=$('#epermission').serialize();
+      var id=$('#eid').val();
+      $.ajax({
+          type: "put",
+          url: "{{route('permissions.index')}}/"+id,
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            $('#editpermission').modal('toggle');
+            $('.data-table').DataTable().ajax.reload();
+          }
+      });
+   });
+   $('.data-table').on('click','.delete',function(){
+     var id=$(this).attr('data-id');
+     $.ajax({
+       type: "delete",
+       url: "{{route('permissions.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        $('.data-table').DataTable().ajax.reload();
+       }
+     });
+   });
+   $('.data-table').on('click','.editpermission',function()
+   {
+       $.ajax({
+           type: "get",
+           url: "{{route('permissions.index')}}/"+$(this).attr('data-id'),
+           dataType: "json",
+           success: function (response) {
+            $('#ename').val(response.data.name);
+            $('#eid').val(response.data.id);
+            $('#editpermission').modal('toggle');
+           }
+       });
+   });
   </script>
 @endsection

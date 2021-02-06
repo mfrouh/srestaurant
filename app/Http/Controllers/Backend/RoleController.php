@@ -62,8 +62,8 @@ class RoleController extends Controller
         $this->validate($request,[
             'name'=>'required|unique:roles'
         ]);
-        Role::create(['name'=>$request->name,'guard_name'=>'admin']);
-        return redirect('/roles')->with('success','تم انشاء الوظيفة بنجاح');
+        Role::create(['name'=>$request->name]);
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -74,13 +74,14 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-       $role=Role::findById($id,'admin');
-       if ($role->name!=="SuperAdmin") {
-       $permissions=Permission::all();
-       $rolepermissions=Role::findById($id,'admin')->permissions->pluck('id')->toArray();
-       return view('Backend.roles.show',compact('role','permissions','rolepermissions'));
-       }
-       return abort('404');
+       $role=Role::findById($id);
+       return response()->json(['data'=>$role],200);
+    //    if ($role->name!=="SuperAdmin") {
+    //    $permissions=Permission::all();
+    //    $rolepermissions=Role::findById($id,'admin')->permissions->pluck('id')->toArray();
+    //    return view('Backend.roles.show',compact('role','permissions','rolepermissions'));
+    //    }
+    //    return abort('404');
     }
     public function role_permissions(Request $request)
     {
@@ -122,8 +123,8 @@ class RoleController extends Controller
         $this->validate($request,[
             'name'=>'required|unique:roles,name,'.$id,
         ]);
-        DB::table('roles')->where('id',$id)->update(['name'=>$request->name,'guard_name'=>'admin']);
-        return redirect('/roles')->with('success','تم تعديل الوظيفة بنجاح');
+        DB::table('roles')->where('id',$id)->update(['name'=>$request->name]);
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -134,7 +135,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Role::findById($id,'admin')->delete();
-        return back()->with('success','تم حذف الوظيفة بنجاح');
+        Role::findById($id)->delete();
+        return response()->json(['data'=>'success deleted'],200);
     }
 }

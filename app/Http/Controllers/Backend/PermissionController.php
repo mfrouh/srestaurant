@@ -61,7 +61,7 @@ class PermissionController extends Controller
             'name'=>'required|unique:permissions'
         ]);
         Permission::create(['name'=>$request->name]);
-        return redirect('/permissions')->with('success','تم انشاء الصلاحية بنجاح');
+        return response()->json(['data'=>'success created'],200);
     }
 
     /**
@@ -73,7 +73,7 @@ class PermissionController extends Controller
     public function show($id)
     {
        $permission=Permission::findById($id);
-       return view('Backend.permissions.show',compact('permission'));
+       return response()->json(['data'=>$permission],200);
     }
 
     /**
@@ -101,7 +101,7 @@ class PermissionController extends Controller
             'name'=>'required|unique:permissions,name,'.$id,
         ]);
         DB::table('permissions')->where('id',$id)->update(['name'=>$request->name]);
-        return redirect('/permissions')->with('success','تم تعديل الصلاحية بنجاح');
+        return response()->json(['data'=>'success updated'],200);
     }
 
     /**
@@ -113,6 +113,6 @@ class PermissionController extends Controller
     public function destroy($id)
     {
         Permission::findById($id)->delete();
-        return back()->with('success','تم حذف الصلاحية بنجاح');
+        return response()->json(['data'=>'success deleted'],200);
     }
 }

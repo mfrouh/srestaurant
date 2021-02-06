@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $fillable=['category_id','menu_id','name','description','price','status','slug','sku','image','video_url','quantity'];
 
-    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer'];
+    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer','category_name','menu_name'];
 
     public static function boot()
     {
@@ -27,6 +27,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+    public function menu()
+    {
+        return $this->belongsTo('App\Models\Menu');
     }
     public function tags()
     {
@@ -52,9 +56,13 @@ class Product extends Model
     {
         return $this->hasOne(Offer::class);
     }
-    public function setImageAttribute($value)
+    public function getCategoryNameAttribute()
     {
-        $this->attributes['image'] ='';
+        return $this->category->name;
+    }
+    public function getMenuNameAttribute()
+    {
+        return $this->menu->name;
     }
     public function variants()
     {

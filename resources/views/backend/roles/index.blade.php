@@ -33,8 +33,8 @@
         </table>
     </div>
   </div>
-  {{-- <x-createrole/>
-  <x-editrole/> --}}
+  <x-createrole/>
+  <x-editrole/>
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
@@ -61,5 +61,58 @@
           }
       });
    };
+   $('#crole').submit(function (e) {
+       e.preventDefault();
+       var data=$('#crole').serialize();
+      $.ajax({
+          type: "post",
+          url: "{{route('roles.store')}}",
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            $('#createrole').modal('toggle');
+            $('.data-table').DataTable().ajax.reload();
+          }
+        });
+   });
+   $('#erole').submit(function (e) {
+       e.preventDefault();
+      var data=$('#erole').serialize();
+      var id=$('#eid').val();
+      $.ajax({
+          type: "put",
+          url: "{{route('roles.index')}}/"+id,
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            $('#editrole').modal('toggle');
+            $('.data-table').DataTable().ajax.reload();
+          }
+      });
+   });
+   $('.data-table').on('click','.delete',function(){
+     var id=$(this).attr('data-id');
+     $.ajax({
+       type: "delete",
+       url: "{{route('roles.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        $('.data-table').DataTable().ajax.reload();
+       }
+     });
+   });
+   $('.data-table').on('click','.editrole',function()
+   {
+       $.ajax({
+           type: "get",
+           url: "{{route('roles.index')}}/"+$(this).attr('data-id'),
+           dataType: "json",
+           success: function (response) {
+            $('#ename').val(response.data.name);
+            $('#eid').val(response.data.id);
+            $('#editrole').modal('toggle');
+           }
+       });
+   });
   </script>
 @endsection

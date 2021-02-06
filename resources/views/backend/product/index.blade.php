@@ -60,8 +60,8 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'name'},
-                {data: 'category_id', name: 'category_id'},
-                {data: 'menu_id', name: 'menu_id'},
+                {data: 'category_name', name: 'category_id'},
+                {data: 'menu_name', name: 'menu_id'},
                 {data: 'status', name: 'status'},
                 {data: 'price', name: 'price'},
                 {data: 'quantity', name: 'quantity'},
