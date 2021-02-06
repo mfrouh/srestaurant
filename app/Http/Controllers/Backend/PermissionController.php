@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
+use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends Controller
 {
@@ -21,10 +22,21 @@ class PermissionController extends Controller
     //     $this->middleware(['auth','role_or_permission:SuperAdmin|:تعديل صلاحية'])->only(['edit','update']);
     //     $this->middleware(['auth','role_or_permission:SuperAdmin|:حذف صلاحية'])->only('destroy');
     // }
-    public function index()
+    public function index(Request $request)
     {
-       $permissions=Permission::all();
-       return view('Backend.permissions.index',compact('permissions'));
+        if ($request->ajax()) {
+            $data = Permission::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editpermission"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+       return view('Backend.permissions.index');
     }
 
     /**

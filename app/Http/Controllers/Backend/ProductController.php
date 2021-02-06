@@ -7,6 +7,7 @@ use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\EditProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -15,8 +16,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Product::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                               <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('backend.product.index');
     }
 

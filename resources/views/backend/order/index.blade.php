@@ -2,6 +2,9 @@
 @section('title')
  الطلبات
 @endsection
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/datatables.css')}}">
+@endsection
 @section('page-header')
   <!-- breadcrumb -->
   <div class="breadcrumb-header justify-content-between">
@@ -14,5 +17,52 @@
   <!-- breadcrumb -->
 @endsection
 @section('content')
-
+<div class="card">
+    <div class="card-header">العروض</div>
+    <div class="card-body">
+        <table class="table text-center data-table">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>العميل</th>
+                  <th>حالة الطلب</th>
+                  <th>السعر الكلي</th>
+                  <th>الخصم</th>
+                  <th>الصلاحيات</th>
+              </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+    </div>
+  </div>
+@endsection
+@section('js')
+<script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    datatable();
+   function datatable() {
+      var table = $('.data-table').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('order.index') }}",
+          columns: [
+              {data: 'id', name: 'id'},
+              {data: 'user_id', name: 'user_id'},
+              {data: 'status', name: 'status'},
+              {data: 'total_price', name: 'total_price'},
+              {data: 'discount', name: 'discount'},
+              {data: 'action', name: 'action', orderable: false, searchable: false},
+          ],
+          language:
+          {
+            url:"{{asset('assets/js/arabic.json')}}" ,
+          }
+      });
+   };
+  </script>
 @endsection

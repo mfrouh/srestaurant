@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
 
 class MainController extends Controller
 {
@@ -48,16 +49,19 @@ class MainController extends Controller
     'offers','actoffers','inactoffers',
     'coupons','actcoupons','inactcoupons'));
   }
-  public function reviews()
+  public function reviews(Request $request)
   {
-    $reviews=Review::all();
-    return view('Backend.review.index',compact('reviews'));
+    if ($request->ajax()) {
+        $data = Review::select('*');
+        return DataTables::of($data)
+                ->make(true);
+    }
+    return view('Backend.review.index');
   }
   public function image($id)
   {
     $image=Image::findorfail($id);
-    $path=str_replace('storage/','public/',$image->url);
-    Storage::delete($path);
+    Storage::delete($image->url);
     $image->delete();
     return back()->with('success','تم حذف الصورة بنجاح');
   }

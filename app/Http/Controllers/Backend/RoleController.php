@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
@@ -23,10 +24,21 @@ class RoleController extends Controller
     //     $this->middleware(['auth','role_or_permission:SuperAdmin|:تعديل وظيفة'])->only(['edit','update']);
     //     $this->middleware(['auth','role_or_permission:SuperAdmin|:حذف وظيفة'])->only('destroy');
     // }
-    public function index()
+    public function index(Request $request)
     {
-       $roles=Role::where('name','!=','SuperAdmin')->get();
-       return view('Backend.roles.index',compact('roles'));
+        if ($request->ajax()) {
+            $data = Role::select('*');
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editrole"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+       return view('Backend.roles.index');
     }
 
     /**

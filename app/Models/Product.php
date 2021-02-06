@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $table='products';
 
-    protected $fillable=['category_id','name','description','price','status','slug','sku','image','video_url','quantity'];
+    protected $fillable=['category_id','menu_id','name','description','price','status','slug','sku','image','video_url','quantity'];
 
     protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer'];
 
