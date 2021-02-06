@@ -13,7 +13,7 @@ class Menu extends Model
 
     protected $fillable=['name','slug','status'];
 
-    protected $appends=['path'];
+    protected $appends=['path','stat'];
 
     public static function boot()
     {
@@ -31,6 +31,10 @@ class Menu extends Model
     public function getPathAttribute()
     {
       return asset('menu/'.$this->slug);
+    }
+    public function getStatAttribute()
+    {
+      return  $this->status=="active"?'مفعل':'مغلق';
     }
 
 }

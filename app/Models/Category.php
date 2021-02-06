@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $fillable=['name','slug','status'];
 
-    protected $appends=['path'];
+    protected $appends=['path','stat'];
 
     public static function boot()
     {
@@ -38,5 +38,9 @@ class Category extends Model
     public function ScopeInActive($q)
     {
       return  $q->where('status','inactive');
+    }
+    public function getStatAttribute()
+    {
+      return  $this->status=="active"?'مفعل':'مغلق';
     }
 }

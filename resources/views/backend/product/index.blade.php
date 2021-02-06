@@ -59,9 +59,9 @@
             ajax: "{{ route('product.index') }}",
             columns: [
                 {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
                 {data: 'category_id', name: 'category_id'},
                 {data: 'menu_id', name: 'menu_id'},
-                {data: 'name', name: 'name'},
                 {data: 'status', name: 'status'},
                 {data: 'price', name: 'price'},
                 {data: 'quantity', name: 'quantity'},

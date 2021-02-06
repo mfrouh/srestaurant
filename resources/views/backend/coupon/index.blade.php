@@ -26,8 +26,7 @@
               <tr>
                   <th>#</th>
                   <th>الكود</th>
-                  <th>بداية الخصم</th>
-                  <th>نهاية الخصم</th>
+                  <th>الحالة</th>
                   <th>نوع الخصم</th>
                   <th>قيمة الخصم</th>
                   <th>عدد المرات</th>
@@ -58,9 +57,8 @@
           columns: [
               {data: 'id', name: 'id'},
               {data: 'code', name: 'code'},
-              {data: 'start', name: 'start'},
-              {data: 'end', name: 'end'},
-              {data: 'type', name: 'type'},
+              {data: 'activestatus', name: 'status'},
+              {data: 'atype', name: 'type'},
               {data: 'value', name: 'value'},
               {data: 'times', name: 'times'},
               {data: 'action', name: 'action', orderable: false, searchable: false},

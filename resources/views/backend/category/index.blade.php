@@ -55,7 +55,7 @@
           columns: [
               {data: 'id', name: 'id'},
               {data: 'name', name: 'name'},
-              {data: 'status', name: 'status'},
+              {data: 'stat', name: 'status'},
               {data: 'parent_id', name: 'parent_id'},
               {data: 'action', name: 'action', orderable: false, searchable: false},
           ],

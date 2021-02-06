@@ -20,7 +20,7 @@ class Product extends Model
         parent::boot();
         static::saving(function ($model) {
             $model->slug = str_replace(' ','_',$model->name);
-            $model->sku = 'p'.$model->id;
+            // $model->sku = 'p'.$model->id;
         });
     }
 
@@ -83,20 +83,26 @@ class Product extends Model
     }
     public function getvariantpriceAttribute()
     {
-        $min=min($this->variants->pluck('price')->toArray());
-        $max=max($this->variants->pluck('price')->toArray());
+       if ($this->variants->count()!=0) {
+          $min=min($this->variants->pluck('price')->toArray());
+          $max=max($this->variants->pluck('price')->toArray());
         if ($min==$max) {
          return $min;
       }
       return '('.$min.','.$max.')';
+     }
+     return $this->price;
     }
     public function  getvariantpriceafterofferAttribute()
     {
-      $min=min($this->variants->pluck('priceafteroffer')->toArray());
-      $max=max($this->variants->pluck('priceafteroffer')->toArray());
-      if ($min==$max) {
-        return $min;
-       }
-      return '('.$min.','.$max.')';
+        if ($this->variants->count()!=0) {
+            $min=min($this->variants->pluck('priceafteroffer')->toArray());
+          $max=max($this->variants->pluck('priceafteroffer')->toArray());
+          if ($min==$max) {
+            return $min;
+           }
+           return '('.$min.','.$max.')';
+      }
+           return $this->price;
     }
 }
