@@ -73,7 +73,7 @@
    $('#eoffer').submit(function (e) {
        e.preventDefault();
       var data=$('#eoffer').serialize();
-      var id=$('#eid').val();
+      var id=$('#e_id').val();
       $.ajax({
           type: "put",
           url: "{{route('offer.index')}}/"+id,
@@ -97,19 +97,23 @@
      });
    });
    $('.data-table').on('click','.editoffer',function()
-   {
-       $.ajax({
-           type: "get",
-           url: "{{route('offer.index')}}/"+$(this).attr('data-id'),
-           dataType: "json",
-           success: function (response) {
-            $('#ename').val(response.data.name);
-            $('#eid').val(response.data.id);
-            $('#editoffer').modal('toggle');
-
-           }
-       });
-   });
+     {
+         $.ajax({
+             type: "get",
+             url: "{{route('offer.index')}}/"+$(this).attr('data-id'),
+             dataType: "json",
+             success: function (response) {
+              $('#eend_offer').val(response.data.eend_offer);
+              $('#estart_offer').val(response.data.sstart_offer);
+              $('#evalue').val(response.data.value);
+              $('#emessage').val(response.data.message);
+              $('#etype').val(response.data.type);
+              $('#e_id').val(response.data.id);
+              $('#eproduct_id').val(response.data.product_id);
+              $('#editoffer').modal('toggle');
+             }
+         });
+     });
   </script>
 @endsection
 

@@ -41,6 +41,8 @@
   </div>
   <x-createproduct :categories="$categories" :menus="$menus" />
   <x-editproduct :categories="$categories" :menus="$menus" />
+  <x-createoffer />
+  <x-editoffer />
   @endsection
   @section('js')
   <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
@@ -135,6 +137,59 @@
 
              }
          });
+     });
+     $('.data-table').on('click','.createoffer',function()
+     {
+        $('#product_id').val($(this).attr('data-id'));
+        $('#createoffer').modal('toggle');
+     });
+     $('.data-table').on('click','.editoffer',function()
+     {
+         $.ajax({
+             type: "get",
+             url: "{{route('offer.index')}}/"+$(this).attr('data-id'),
+             dataType: "json",
+             success: function (response) {
+              $('#eend_offer').val(response.data.eend_offer);
+              $('#estart_offer').val(response.data.sstart_offer);
+              $('#evalue').val(response.data.value);
+              $('#emessage').val(response.data.message);
+              $('#etype').val(response.data.type);
+              $('#e_id').val(response.data.id);
+              $('#eproduct_id').val(response.data.product_id);
+              $('#editoffer').modal('toggle');
+
+             }
+         });
+     });
+     $('#coffer').submit(function (e) {
+         e.preventDefault();
+         var data = $('#coffer').serialize();
+        $.ajax({
+            type: "post",
+            url: "{{route('offer.store')}}",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+              $('#createoffer').modal('toggle');
+              $('.data-table').DataTable().ajax.reload();
+            }
+          });
+     });
+     $('#eoffer').submit(function (e) {
+         e.preventDefault();
+        var data=$('#eoffer').serialize();
+        var id=$('#e_id').val();
+        $.ajax({
+            type: "put",
+            url: "{{route('offer.index')}}/"+id,
+            data: data,
+            dataType: "json",
+            success: function (response) {
+              $('#editoffer').modal('toggle');
+              $('.data-table').DataTable().ajax.reload();
+            }
+        });
      });
     </script>
   @endsection

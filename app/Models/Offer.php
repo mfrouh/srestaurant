@@ -15,7 +15,7 @@ class Offer extends Model
 
     protected $dates=['start_offer','end_offer'];
 
-    protected $appends=['isactive','activestatus','atype'];
+    protected $appends=['isactive','activestatus','atype','sstart_offer','eend_offer'];
 
     public function product()
     {
@@ -45,5 +45,13 @@ class Offer extends Model
     public function ScopeInactive($q)
     {
        $q->OrWhere('start_offer','>', now())->OrWhere('end_offer','<',now());
+    }
+    public function getEendOfferAttribute()
+    {
+      return $this->end_offer->format('Y-m-d\TH:i');
+    }
+    public function getSstartOfferAttribute()
+    {
+      return $this->start_offer->format('Y-m-d\TH:i');
     }
 }

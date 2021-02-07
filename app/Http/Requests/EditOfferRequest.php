@@ -24,7 +24,7 @@ class EditOfferRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id'=>'required|integer|unique:offers','product_id'.request()->route('offer')->product_id,
+            'product_id'=>'required|integer|unique:offers,product_id,'.request()->route('offer')->id,
             'type'=>'required|in:fixed,variable',
             'value'=>'required|numeric',
             'message'=>'nullable|min:3|max:100',

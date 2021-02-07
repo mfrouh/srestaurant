@@ -28,7 +28,7 @@ class CreateOfferRequest extends FormRequest
             'type'=>'required|in:fixed,variable',
             'value'=>'required|numeric',
             'message'=>'nullable|min:3|max:100',
-            'start_offer'=>'required|before:end_offer|before_or_equal:'.now(),
+            'start_offer'=>'required|before:end_offer|after_or_equal:'.now(),
             'end_offer'=>'required|after:start_offer|after:'.now(),
         ];
     }

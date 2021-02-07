@@ -25,8 +25,15 @@ class ProductController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                               <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        $btn='';
+                        if ($row->offer) {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>';
+                        }
+                        else {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-success m-1 btn-sm createoffer"  data-id="'.$row->id.'">انشاء عرض</a>';
+                        }
+                        $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])

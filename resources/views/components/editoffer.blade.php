@@ -1,9 +1,9 @@
-<div id="createoffer" class="modal fade">
+<div id="editoffer" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
             <div class="modal-header">تعديل العرض</div>
             <div class="modal-body">
-                 <form id="coffer">
+                 <form id="eoffer">
                      <div class="row">
                         <div class="form-group col-12">
                             <label for="">نوع العرض</label>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group text-center col-12">
                             <input type="hidden" id="eproduct_id" name="product_id">
-                            <input type="hidden" id="eid" name="id">
+                            <input type="hidden" id="e_id" name="id">
                             <input type="submit" value="حفظ"  class="btn btn-primary">
                         </div>
                      </div>
