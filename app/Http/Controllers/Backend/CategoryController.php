@@ -23,7 +23,14 @@ class CategoryController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcategory"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                        $btn='';
+                        if ($row->status=='active') {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
+                        }
+                        else {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                        }
+                           $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcategory"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
                                    <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
@@ -38,9 +45,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function status(Request $request)
     {
-        //
+        Category::findorfail($request->id)->ChangeState();
+        return response()->json(['data'=>'success changed']);
     }
 
     /**

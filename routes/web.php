@@ -33,6 +33,12 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('roles', 'Backend\RoleController');
    Route::resource('tag', 'Backend\TagController');
    Route::resource('order', 'Backend\OrderController');
+
+   Route::post('category/status', 'Backend\CategoryController@status');
+   Route::post('menu/status', 'Backend\MenuController@status');
+   Route::post('product/status', 'Backend\ProductController@status');
+
+
    Route::get('/setting', 'Backend\SettingController@index')->name('setting.index');
    Route::post('/setting', 'Backend\SettingController@store')->name('setting.store');
    Route::get('/change-password', 'Backend\ChangepasswordController@index')->name('change-password.index');

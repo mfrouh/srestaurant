@@ -118,4 +118,9 @@ class Product extends Model
       }
            return $this->price;
     }
+    public function ScopeChangeState()
+    {
+      $status= $this->status=='active'?'inactive':'active';
+      return  $this->update(['status'=>$status]);
+    }
 }

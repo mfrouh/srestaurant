@@ -44,5 +44,10 @@ class Menu extends Model
     {
       return  $q->where('status','inactive');
     }
+    public function ScopeChangeState()
+    {
+      $status= $this->status=='active'?'inactive':'active';
+      return  $this->update(['status'=>$status]);
+    }
 
 }

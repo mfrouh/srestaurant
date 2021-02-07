@@ -43,4 +43,9 @@ class Category extends Model
     {
       return  $this->status=="active"?'مفعل':'مغلق';
     }
+    public function ScopeChangeState()
+    {
+      $status= $this->status=='active'?'inactive':'active';
+      return  $this->update(['status'=>$status]);
+    }
 }

@@ -119,5 +119,18 @@
            }
        });
    });
+   $('.data-table').on('click','.changestatus',function()
+   {
+       $.ajax({
+           type: "post",
+           url: "{{route('category.index')}}/status",
+           dataType: "json",
+           data:{id:$(this).attr('data-id')},
+           success: function (response) {
+            $('.data-table').DataTable().ajax.reload();
+
+           }
+       });
+   });
   </script>
 @endsection

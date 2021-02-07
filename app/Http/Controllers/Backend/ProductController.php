@@ -26,6 +26,12 @@ class ProductController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn='';
+                        if ($row->status=='active') {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
+                        }
+                        else {
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                        }
                         if ($row->offer) {
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>';
                         }
@@ -49,9 +55,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function status(Request $request)
     {
-        //
+        Product::findorfail($request->id)->ChangeState();
+        return response()->json(['data'=>'success changed']);
     }
 
     /**
