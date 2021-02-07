@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\EditProductRequest;
+use App\Models\Category;
+use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -30,7 +32,9 @@ class ProductController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('backend.product.index');
+        $categories=Category::Active()->get();
+        $menus=Menu::Active()->get();
+        return view('backend.product.index',compact('categories','menus'));
     }
 
     /**
@@ -51,9 +55,9 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        Product::create($request->validated());
+        $product=Product::create($request->validated());
+        $product->update();
         return response()->json(['data'=>'success created'],200);
-
     }
 
     /**

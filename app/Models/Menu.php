@@ -36,5 +36,13 @@ class Menu extends Model
     {
       return  $this->status=="active"?'مفعل':'مغلق';
     }
+    public function ScopeActive($q)
+    {
+     return  $q->where('status','active');
+    }
+    public function ScopeInActive($q)
+    {
+      return  $q->where('status','inactive');
+    }
 
 }

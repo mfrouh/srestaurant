@@ -62,7 +62,6 @@
                             <small  class="text-muted"></small>
                         </div>
                         <div class="form-group text-center col-12">
-                            <input type="hidden" id="eid">
                             <input type="submit" value="حفظ"  class="btn btn-primary">
                         </div>
                      </div>

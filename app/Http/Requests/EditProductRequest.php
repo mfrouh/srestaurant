@@ -29,14 +29,10 @@ class EditProductRequest extends FormRequest
             'name'=>'required|unique:products,name,'.request()->route('product')->id,
             'description'=>'required|min:50',
             'price'=>'required|numeric',
-            'status'=>'required|in:active,inactive',
-            'tags'=>'required',
-            'images'=>'required',
-            'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+            'status'=>'nullable|in:active,inactive',
+            'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'video_url'=>'nullable|url',
-            'images.*'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'quantity'=>'required|numeric',
-
         ];
     }
 }

@@ -26,15 +26,12 @@ class CreateProductRequest extends FormRequest
         return [
             'category_id'=>'required|integer',
             'menu_id'=>'required|integer',
-            'name'=>'required',
+            'name'=>'required:unique:products',
             'description'=>'required|min:50',
             'price'=>'required|numeric',
-            'status'=>'required|in:active,inactive',
-            'tags'=>'required',
-            'images'=>'required',
-            'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+            'status'=>'nullable|in:active,inactive',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'video_url'=>'nullable|url',
-            'images.*'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'quantity'=>'required|numeric',
         ];
     }

@@ -11,9 +11,12 @@ class editproduct extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $categories;
+    public $menus;
+    public function __construct($categories,$menus)
     {
-        //
+        $this->categories=$categories;
+        $this->menus=$menus;
     }
 
     /**

@@ -25,7 +25,6 @@
         <table class="table text-center data-table">
           <thead>
               <tr>
-                {{-- 'category_id','menu_id','name','description','price','status','slug','sku','image','video_url','quantity' --}}
                   <th>#</th>
                   <th>اسم المنتج</th>
                   <th>القسم</th>
@@ -40,8 +39,8 @@
         </table>
     </div>
   </div>
-  <x-createproduct/>
-  <x-editproduct />
+  <x-createproduct :categories="$categories" :menus="$menus" />
+  <x-editproduct :categories="$categories" :menus="$menus" />
   @endsection
   @section('js')
   <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
@@ -75,12 +74,16 @@
      };
      $('#cproduct').submit(function (e) {
          e.preventDefault();
-         var data=$('#cproduct').serialize();
+         var image= $('#image').get()[0].files[0];
+         var data = new FormData($('#cproduct')[0]);
+         data.append('image', $('input[type=file]')[0].files[0]);
         $.ajax({
             type: "post",
             url: "{{route('product.store')}}",
             data: data,
             dataType: "json",
+            processData: false,
+            contentType: false,
             success: function (response) {
               $('#createproduct').modal('toggle');
               $('.data-table').DataTable().ajax.reload();
@@ -122,6 +125,12 @@
              success: function (response) {
               $('#ename').val(response.data.name);
               $('#eid').val(response.data.id);
+              $('#ecategory_id').val(response.data.category_id);
+              $('#emenu_id').val(response.data.menu_id);
+              $('#edescription').val(response.data.description);
+              $('#eprice').val(response.data.price);
+              $('#equantity').val(response.data.quantity);
+              $('#evideo_url').val(response.data.video_url);
               $('#editproduct').modal('toggle');
 
              }

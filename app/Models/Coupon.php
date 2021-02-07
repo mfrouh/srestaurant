@@ -56,5 +56,5 @@ class Coupon extends Model
        $q->OrWhere('start','>', now())->OrWhere('end','<',now());
     }
 
-   
+
 }

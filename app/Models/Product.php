@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Intervention\Image\ImageManagerStatic as Image;
 class Product extends Model
 {
     use HasFactory;
@@ -20,7 +20,7 @@ class Product extends Model
         parent::boot();
         static::saving(function ($model) {
             $model->slug = str_replace(' ','_',$model->name);
-            // $model->sku = 'p'.$model->id;
+            $model->sku = 'p'.$model->id;
         });
     }
 
@@ -47,6 +47,11 @@ class Product extends Model
     public function getstatAttribute()
     {
       return  $this->status=="active"?'مفعل':'مغلق';
+    }
+    public function setImageAttribute($value)
+    {
+        Image::make($value)->resize(500,500)->save('images/products/'.$this->name.$this->catgory_id.'.png');
+        $this->attributes['image']='images/products/'.$this->name.$this->catgory_id.'.png';
     }
     public function gallery()
     {
