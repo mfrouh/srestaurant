@@ -31,6 +31,7 @@
                   <th>القائمة</th>
                   <th>الحالة</th>
                   <th>السعر</th>
+                  <th> السعر بعد العرض</th>
                   <th>الكمية</th>
                   <th>الصلاحيات</th>
               </tr>
@@ -65,6 +66,7 @@
                 {data: 'menu_name', name: 'menu_id'},
                 {data: 'stat', name: 'status'},
                 {data: 'price', name: 'price'},
+                {data: 'priceafteroffer', name: 'priceafteroffer', orderable: false, searchable: false},
                 {data: 'quantity', name: 'quantity'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
@@ -161,6 +163,17 @@
 
              }
          });
+     });
+     $('.data-table').on('click','.canceloffer',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('offer.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        $('.data-table').DataTable().ajax.reload();
+       }
+      });
      });
      $('#coffer').submit(function (e) {
          e.preventDefault();

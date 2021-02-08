@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $fillable=['category_id','menu_id','name','description','price','status','slug','sku','image','video_url','quantity'];
 
-    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer','stat','category_name','menu_name'];
+    protected $appends=['priceafteroffer','variantprice','variantpriceafteroffer','stat','category_name','menu_name','image_path'];
 
     public static function boot()
     {
@@ -65,6 +65,10 @@ class Product extends Model
     {
         return $this->category->name;
     }
+    public function getImagePathAttribute()
+    {
+        return asset($this->image);
+    }
     public function getMenuNameAttribute()
     {
         return $this->menu->name;
@@ -89,7 +93,12 @@ class Product extends Model
              }
          }
          if ($this->offer->type=='variable') {
-            return $this->price - (($this->price*$this->offer->value)/100);
+            if ($this->price - (($this->price*$this->offer->value)/100)>0) {
+                return $this->price - (($this->price*$this->offer->value)/100);
+            }
+            else {
+                return $this->price;
+             }
          }
        }
        return $this->price;

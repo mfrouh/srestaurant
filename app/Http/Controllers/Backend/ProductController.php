@@ -26,6 +26,7 @@ class ProductController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn='';
+                        $route=route('showproduct',[$row->id]);
                         if ($row->status=='active') {
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
                         }
@@ -33,13 +34,15 @@ class ProductController extends Controller
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
                         }
                         if ($row->offer) {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>';
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>
+                                   <a href="javascript:void(0);" class="edit btn btn-dark m-1 btn-sm canceloffer"  data-id="'.$row->offer->id.'">الغاء عرض</a>';
                         }
                         else {
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-success m-1 btn-sm createoffer"  data-id="'.$row->id.'">انشاء عرض</a>';
                         }
-                        $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        $btn .= '<a href="'.$route.'" class="edit btn btn-success m-1 btn-sm"><i class="fa fa-eye"></i></a>
+                                 <a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
+                                 <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -92,9 +95,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function showproduct($id)
     {
-        //
+        $product=Product::findOrfail($id)->first();
+        $categories=Category::Active()->get();
+        $menus=Menu::Active()->get();
+        return view('backend.product.show',compact('product','menus','categories'));
     }
 
     /**

@@ -28,8 +28,7 @@
                   <th>نوع الخصم</th>
                   <th>قيمة الخصم</th>
                   <th>الرسالة</th>
-                  <th>بداية العرض</th>
-                  <th>نهاية العرض</th>
+                  <th>الحالة</th>
                   <th>الصلاحيات</th>
               </tr>
           </thead>
@@ -57,11 +56,10 @@
           columns: [
               {data: 'id', name: 'id'},
               {data: 'product_id', name: 'product_id'},
-              {data: 'type', name: 'type'},
+              {data: 'atype', name: 'type'},
               {data: 'value', name: 'value'},
               {data: 'message', name: 'message'},
-              {data: 'start_offer', name: 'start_offer'},
-              {data: 'end_offer', name: 'end_offer'},
+              {data: 'activestatus', name: 'start_offer'},
               {data: 'action', name: 'action', orderable: false, searchable: false},
           ],
           language:

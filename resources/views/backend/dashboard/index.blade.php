@@ -38,7 +38,7 @@
 							<h4 class="tx-20 font-weight-bold mb-1 mr-5 ml-5 text-dark">{{$actcategories}}</h4>
                         </div>
                         <div class="">
-							<h4 class="tx-20 font-weight-bold mb-1 mr-5 text-danger">{{$inactcategories}}</h4>
+							<h4 class="tx-20 font-weight-bold mb-1 text-danger">{{$inactcategories}}</h4>
 						</div>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 							<h4 class="tx-20 font-weight-bold mb-1 mr-5 ml-5 text-dark">{{$actproducts}}</h4>
 						</div>
 						<div class="">
-							<h4 class="tx-20 font-weight-bold mb-1  mr-5  text-danger">{{$inactproducts}}</h4>
+							<h4 class="tx-20 font-weight-bold mb-1 text-danger">{{$inactproducts}}</h4>
 						</div>
 
 					</div>
@@ -174,7 +174,7 @@
 							<h4 class="tx-20 font-weight-bold mb-1 mr-5 ml-5 text-dark">{{$actcoupons}}</h4>
                         </div>
                         <div class="">
-							<h4 class="tx-20 font-weight-bold mb-1 mr-5 text-danger">{{$inactcoupons}}</h4>
+							<h4 class="tx-20 font-weight-bold mb-1  text-danger">{{$inactcoupons}}</h4>
 						</div>
 					</div>
 				</div>
@@ -196,7 +196,7 @@
 							<h4 class="tx-20 font-weight-bold mb-1 mr-5 ml-5 text-success">{{$actoffers}}</h4>
                         </div>
                         <div class="">
-							<h4 class="tx-20 font-weight-bold mb-1 mr-5 text-dark">{{$inactoffers}}</h4>
+							<h4 class="tx-20 font-weight-bold mb-1  text-dark">{{$inactoffers}}</h4>
 						</div>
 					</div>
 				</div>

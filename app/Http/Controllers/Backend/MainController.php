@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Image;
+use App\Models\Menu;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Product;
@@ -64,5 +65,25 @@ class MainController extends Controller
     Storage::delete($image->url);
     $image->delete();
     return back()->with('success','تم حذف الصورة بنجاح');
+  }
+  public function cashier(Request $request)
+  {
+       if ($request->ajax()) {
+          $products=Product::query();
+          if ($request->product && $request->product!='') {
+             $products->where('name','like','%'.$request->product.'%');
+          }
+          if ($request->category_id) {
+             $products->whereIn('category_id',$request->category_id);
+          }
+          if ($request->menu_id) {
+             $products->whereIn('menu_id',$request->menu_id);
+          }
+        $products=$products->Active()->latest()->take(12)->get();
+          return response()->json($products);
+       }
+       $categories=Category::Active()->get();
+       $menus=Menu::Active()->get();
+    return view('backend.cashier.index',compact('categories','menus'));
   }
 }
