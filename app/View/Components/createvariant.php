@@ -11,9 +11,11 @@ class createvariant extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $attribute;
+
+    public function __construct($attribute)
     {
-        //
+        $this->attribute=$attribute;
     }
 
     /**

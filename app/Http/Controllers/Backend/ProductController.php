@@ -97,7 +97,7 @@ class ProductController extends Controller
      */
     public function showproduct($id)
     {
-        $product=Product::findOrfail($id)->first();
+        $product=Product::findOrfail($id);
         $categories=Category::Active()->get();
         $menus=Menu::Active()->get();
         return view('backend.product.show',compact('product','menus','categories'));

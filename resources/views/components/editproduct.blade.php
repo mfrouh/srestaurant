@@ -1,7 +1,7 @@
 <div id="editproduct" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
-            <div class="modal-header">انشاء منتج</div>
+            <div class="modal-header">تعديل منتج</div>
             <div class="modal-body">
                  <form id="eproduct">
                     <div class="row">

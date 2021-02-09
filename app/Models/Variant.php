@@ -11,9 +11,11 @@ class Variant extends Model
 
     protected $table='variants';
 
+    protected $with=['values'];
+
     protected $fillable=['sku','price','quantity','product_id'];
 
-    protected $appends=['priceafteroffer'];
+    protected $appends=['price_a_offer'];
 
     public function values()
     {
@@ -23,21 +25,21 @@ class Variant extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
-    public function getPriceafterofferAttribute()
+    public function getPriceAofferAttribute()
     {
-       if ($this->product->offer && $this->product->offer->isactive) {
-         if ($this->product->offer->type=='fixed') {
-             if (($this->price - $this->product->offer->value)>0) {
-                return $this->price - $this->product->offer->value;
-             }
-             else {
-                return $this->price;
-             }
-         }
-         if ($this->product->offer->type=='variable') {
-            return $this->price - (($this->price*$this->product->offer->value)/100);
-         }
-       }
+       //if ($this->product->offer && $this->product->offer->isactive) {
+        //  if ($this->product->offer->type=='fixed') {
+        //      if (($this->price - $this->product->offer->value)>0) {
+        //         return $this->price - $this->product->offer->value;
+        //      }
+        //      else {
+        //         return $this->price;
+        //      }
+        //  }
+        //  if ($this->product->offer->type=='variable') {
+        //     return $this->price - (($this->price*$this->product->offer->value)/100);
+        //  }
+     //  }
        return $this->price;
     }
 }

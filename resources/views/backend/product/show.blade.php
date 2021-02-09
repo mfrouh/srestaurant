@@ -88,7 +88,7 @@
   <x-editattribute />
   <x-createvalue />
   <x-editvalue />
-  <x-createvariant />
+  <x-createvariant :attribute="$product->attributes" />
   <x-editvariant />
 @endsection
 @section('js')
@@ -98,6 +98,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    getvariants();
     getattributes();
      $('.productactions').on('click','.editproduct',function()
      {
@@ -203,6 +204,36 @@
        }
       });
      });
+     $(document).on('click','.createvariant',function()
+     {
+        $('#vproduct_id').val($(this).attr('data-id'));
+        $('#createvariant').modal('toggle');
+     });
+     $(document).on('click','.editvariant',function()
+     {
+         $.ajax({
+             type: "get",
+             url: "{{route('variant.index')}}/"+$(this).attr('data-id'),
+             dataType: "json",
+             success: function (response) {
+              $('#evvariant').val(response.data.variant);
+              $('#evid').val(response.data.id);
+              $('#evattribute_id').val(response.data.attribute_id);
+              $('#editvariant').modal('toggle');
+
+             }
+         });
+     });
+     $('.productactions').on('click','.deletevariant',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('variant.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+       }
+      });
+     });
      $('#eproduct').submit(function (e) {
          e.preventDefault();
         var data=$('#eproduct').serialize();
@@ -255,6 +286,7 @@
             dataType: "json",
             success: function (response) {
                 getattributes();
+                getvariants();
               $('#createattribute').modal('toggle');
             }
           });
@@ -270,6 +302,7 @@
             dataType: "json",
             success: function (response) {
                 getattributes();
+                getvariants();
               $('#editattribute').modal('toggle');
 
             }
@@ -296,6 +329,7 @@
             dataType: "json",
             success: function (response) {
                 getattributes();
+                getvariants();
               $('#createvalue').modal('toggle');
             }
           });
@@ -311,6 +345,7 @@
             dataType: "json",
             success: function (response) {
                 getattributes();
+                getvariants();
               $('#editvalue').modal('toggle');
 
             }
@@ -324,6 +359,50 @@
        dataType: "json",
        success: function (response) {
         getattributes();
+        getvariants();
+       }
+      });
+     });
+     $('#cvariant').submit(function (e) {
+         e.preventDefault();
+         var data = $('#cvariant').serialize();
+        $.ajax({
+            type: "post",
+            url: "{{route('variant.store')}}",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+                getvariants();
+              $('#createvariant').modal('toggle');
+            }
+          });
+     });
+     $('#edvariant').submit(function (e) {
+         e.preventDefault();
+        var data=$('#edvariant').serialize();
+        var id=$('#evid').val();
+        $.ajax({
+            type: "put",
+            url: "{{route('variant.index')}}/"+id,
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+                getvariants();
+              $('#editvariant').modal('toggle');
+
+            }
+        });
+     });
+     $(document).on('click','.deletevariant',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('variant.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        getvariants();
        }
       });
      });
@@ -343,6 +422,26 @@
                    attribute(el);
                    });
                $('.attributes').html(attributes);
+            }
+        });
+    }
+    function getvariants()
+    {
+        var product_id =$('.editproduct').attr('data-id');
+        $.ajax({
+            type: "get",
+            url: "{{route('variant.index')}}",
+            data:{product_id,product_id},
+            dataType: "json",
+            success: function (response) {
+               variants='';va='';
+               response.forEach(el => {
+                valuesvar='';
+                el.values.forEach(ele => {valuesv(ele);});
+                variant(el);
+               });
+               tablevariants();
+               $('.variants').html(variants);
             }
         });
     }
@@ -369,6 +468,40 @@
            '<a class="btn btn-primary btn-sm float-left m-1  editvalue" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-edit"></i></a>'+
           '</div>'+
         '</div>';
+    }
+    function variant(el)
+    {
+        va+= '<tr>'+
+             '<td>'+el.id+'</td>'+
+             '<td>'+valuesvar+'</td>'+
+             '<td>'+el.price+'</td>'+
+             '<td>'+el.quantity+'</td>'+
+             '<td><a class="btn btn-danger btn-sm m-1 deletevariant" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-trash"></i></a></td>'+
+            '</tr>';
+    }
+    function tablevariants()
+    {
+        variants+=
+        '<div class="card col-12">'+
+            '<div class="card-body">'+
+                  '<table class="table text-center">'+
+                     '<thead>'+
+                        '<tr>'+
+                         '<th>#</th>'+
+                         '<th>القيم</th>'+
+                         '<th>السعر</th>'+
+                         '<th>الكمية</th>'+
+                         '<th>#</th>'+
+                        '</tr>'+
+                     '</thead>'+
+                     '<tbody>'+va+'</tbody>'+
+                  '</table>'+
+            '</div>'+
+        '</div>';
+    }
+    function valuesv(el)
+    {
+        valuesvar+=el.value+'_';
     }
  </script>
 @endsection

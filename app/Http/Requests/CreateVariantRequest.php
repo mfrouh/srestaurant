@@ -25,7 +25,6 @@ class CreateVariantRequest extends FormRequest
     {
         return [
             'product_id'=>'required|integer',
-            'sku'=>'required',
             'price'=>'required',
             'quantity'=>'required|integer',
         ];

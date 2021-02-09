@@ -37,6 +37,7 @@ class ValueController extends Controller
 
     public function destroy(Value $value)
     {
+        $value->variants()->delete();
         $value->delete();
         return response()->json(['data'=>'success deleted'],200);
     }
