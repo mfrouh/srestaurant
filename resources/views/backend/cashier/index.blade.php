@@ -19,7 +19,7 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-12 col-xl-9">
+    <div class="col-md-12 col-xl-8">
          <div class="card">
            <div class="card-body">
                <form class="row" id="search">
@@ -53,7 +53,7 @@
 
         </div>
     </div>
-    <div class="col-md-12 col-xl-3">
+    <div class="col-md-12 col-xl-4">
         <div class="card ">
           <div class="card-header text-center bg-primary-gradient">الطلب</div>
           <div class="card-body order">
@@ -102,6 +102,15 @@
             }
         });
     }
+    $(document).on('click','.addtocard',function(){
+        addorder($(this).attr('data-id'))
+    });
+    function addorder(el)
+    {
+        orders='';
+        order(el);
+        $('.order').html(orders);
+    }
     function order()
     {
         $.ajax({
@@ -132,7 +141,7 @@
     function order(el)
     {
       orders+=
-      '<a>mfrouh</a>';
+      '<a>'+el+'</a>';
     }
 
  </script>
