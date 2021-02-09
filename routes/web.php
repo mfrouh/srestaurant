@@ -33,6 +33,9 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('roles', 'Backend\RoleController');
    Route::resource('tag', 'Backend\TagController');
    Route::resource('order', 'Backend\OrderController');
+   Route::resource('attribute', 'Backend\AttributeController');
+   Route::resource('value', 'Backend\ValueController');
+   Route::resource('variant', 'Backend\VariantController');
 
    Route::post('category/status', 'Backend\CategoryController@status');
    Route::post('menu/status', 'Backend\MenuController@status');

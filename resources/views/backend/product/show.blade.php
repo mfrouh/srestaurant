@@ -76,10 +76,20 @@
 </div>
 <hr>
 <h3>الخصائص</h3>
-<a href="javascript:void(0);" class="btn btn-pink btn-sm createattribute" data-id="{{$product->id}}">انشاء خاصية</a>
+<a href="javascript:void(0);" class="btn btn-pink btn-sm createattribute m-2" data-id="{{$product->id}}">انشاء خاصية</a>
+<div class="row attributes"></div>
+<h3>الانواع</h3>
+<a href="javascript:void(0);" class="btn btn-secondary btn-sm createvariant m-2" data-id="{{$product->id}}">انشاء نوع</a>
+<div class="row variants"></div>
   <x-editproduct :categories="$categories" :menus="$menus" />
   <x-createoffer />
   <x-editoffer />
+  <x-createattribute />
+  <x-editattribute />
+  <x-createvalue />
+  <x-editvalue />
+  <x-createvariant />
+  <x-editvariant />
 @endsection
 @section('js')
   <script type="text/javascript">
@@ -88,6 +98,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    getattributes();
      $('.productactions').on('click','.editproduct',function()
      {
          $.ajax({
@@ -132,6 +143,26 @@
              }
          });
      });
+     $(document).on('click','.createattribute',function()
+     {
+        $('#aproduct_id').val($(this).attr('data-id'));
+        $('#createattribute').modal('toggle');
+     });
+     $(document).on('click','.editattribute',function()
+     {
+         $.ajax({
+             type: "get",
+             url: "{{route('attribute.index')}}/"+$(this).attr('data-id'),
+             dataType: "json",
+             success: function (response) {
+              $('#eaname').val(response.data.name);
+              $('#eaid').val(response.data.id);
+              $('#eaproduct_id').val(response.data.product_id);
+              $('#editattribute').modal('toggle');
+
+             }
+         });
+     });
      $('.productactions').on('click','.canceloffer',function(){
       var id=$(this).attr('data-id');
       $.ajax({
@@ -139,7 +170,36 @@
        url: "{{route('offer.index')}}/"+id,
        dataType: "json",
        success: function (response) {
-       // $('.data-table').DataTable().ajax.reload();
+       }
+      });
+     });
+     $(document).on('click','.createvalue',function()
+     {
+        $('#vattribute_id').val($(this).attr('data-id'));
+        $('#createvalue').modal('toggle');
+     });
+     $(document).on('click','.editvalue',function()
+     {
+         $.ajax({
+             type: "get",
+             url: "{{route('value.index')}}/"+$(this).attr('data-id'),
+             dataType: "json",
+             success: function (response) {
+              $('#evvalue').val(response.data.value);
+              $('#evid').val(response.data.id);
+              $('#evattribute_id').val(response.data.attribute_id);
+              $('#editvalue').modal('toggle');
+
+             }
+         });
+     });
+     $('.productactions').on('click','.deletevalue',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('value.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
        }
       });
      });
@@ -168,7 +228,6 @@
             dataType: "json",
             success: function (response) {
               $('#createoffer').modal('toggle');
-              $('.data-table').DataTable().ajax.reload();
             }
           });
      });
@@ -183,9 +242,133 @@
             dataType: "json",
             success: function (response) {
               $('#editoffer').modal('toggle');
-              $('.data-table').DataTable().ajax.reload();
             }
         });
      });
+     $('#cattribute').submit(function (e) {
+         e.preventDefault();
+         var data = $('#cattribute').serialize();
+        $.ajax({
+            type: "post",
+            url: "{{route('attribute.store')}}",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+              $('#createattribute').modal('toggle');
+            }
+          });
+     });
+     $('#eattribute').submit(function (e) {
+         e.preventDefault();
+        var data=$('#eattribute').serialize();
+        var id=$('#eaid').val();
+        $.ajax({
+            type: "put",
+            url: "{{route('attribute.index')}}/"+id,
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+              $('#editattribute').modal('toggle');
+
+            }
+        });
+     });
+     $(document).on('click','.deleteattribute',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('attribute.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        getattributes();
+       }
+      });
+     });
+     $('#cvalue').submit(function (e) {
+         e.preventDefault();
+         var data = $('#cvalue').serialize();
+        $.ajax({
+            type: "post",
+            url: "{{route('value.store')}}",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+              $('#createvalue').modal('toggle');
+            }
+          });
+     });
+     $('#edvalue').submit(function (e) {
+         e.preventDefault();
+        var data=$('#edvalue').serialize();
+        var id=$('#evid').val();
+        $.ajax({
+            type: "put",
+            url: "{{route('value.index')}}/"+id,
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                getattributes();
+              $('#editvalue').modal('toggle');
+
+            }
+        });
+     });
+     $(document).on('click','.deletevalue',function(){
+      var id=$(this).attr('data-id');
+      $.ajax({
+       type: "delete",
+       url: "{{route('value.index')}}/"+id,
+       dataType: "json",
+       success: function (response) {
+        getattributes();
+       }
+      });
+     });
+    function getattributes()
+    {
+          var product_id =$('.editproduct').attr('data-id');
+        $.ajax({
+            type: "get",
+            url: "{{route('attribute.index')}}",
+            data:{product_id,product_id},
+            dataType: "json",
+            success: function (response) {
+               attributes='';
+               response.forEach(el => {
+                   values='';
+                   el.values.forEach(element => {value(element)});
+                   attribute(el);
+                   });
+               $('.attributes').html(attributes);
+            }
+        });
+    }
+    function attribute(el)
+    {
+      attributes+=
+      '<div class="col-xl-3 col-md-4 col-sm-6">'+
+        '<div class="card">'+
+          '<div class="card-header">'+el.name+'<a class="btn btn-danger btn-sm float-left m-1 deleteattribute" href="javascript:void(0)" data-id="'+el.id+'">'+
+            '<i class="fa fa-trash"></i></a>'+
+            '<a class="btn btn-primary btn-sm float-left m-1 editattribute" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-edit"></i></a>'+
+          '</div>'+
+          '<div class="card-body">'+values+'</div>'+
+          '<div class="card-footer text-center"><a class="btn btn-primary btn-sm createvalue" href="javascript:void(0);" data-id="'+el.id+'">انشاء قيمة</a></div>'+
+       '</div>'+
+     '</div>';
+    }
+    function value(el)
+    {
+        values+=
+        '<div class="row m-1">'+
+          '<div class="col-6">'+el.value+'</div>'+
+          '<div class="col-6"><a class="btn btn-danger btn-sm float-left m-1 deletevalue" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-trash"></i></a>'+
+           '<a class="btn btn-primary btn-sm float-left m-1  editvalue" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-edit"></i></a>'+
+          '</div>'+
+        '</div>';
+    }
  </script>
 @endsection
