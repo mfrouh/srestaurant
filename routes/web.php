@@ -50,8 +50,8 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/profile-setting', 'Backend\ProfilesettingController@index')->name('profile-setting.index');
    Route::post('/profile-setting', 'Backend\ProfilesettingController@store')->name('profile-setting.store');
    Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
-   Route::get('/cashier', 'Backend\MainController@cashier')->name('cashier');
-   Route::get('/cashier/order', 'Backend\MainController@order')->name('cashier.order');
+   Route::get('/cashier', 'Backend\CashierController@index')->name('cashier');
+   Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 
 
