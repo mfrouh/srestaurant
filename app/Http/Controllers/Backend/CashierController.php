@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Cart\Cart as Cart;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Menu;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -31,8 +33,10 @@ class CashierController extends Controller
        return view('backend.cashier.index',compact('categories','menus'));
     }
 
-    public function order()
+    public function order(Request $request,Cart $cart)
     {
-      return cookie('mohamed','frouh',20);
+       $product=Product::findOrfail($request->id);
+       $cart->CreateORUpdate($product->id,$product->sku);
+       return response()->json($cart->content());
     }
 }

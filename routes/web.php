@@ -51,7 +51,9 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::post('/profile-setting', 'Backend\ProfilesettingController@store')->name('profile-setting.store');
    Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
    Route::get('/cashier', 'Backend\CashierController@index')->name('cashier');
-   Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
+   Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.createorder');
+   Route::get('/cart', 'Backend\CartController@index')->name('cashier.order');
+   Route::delete('/cart/{id}', 'Backend\CartController@destroy')->name('cashier.deleteorder');
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 
 

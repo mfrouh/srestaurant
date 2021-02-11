@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Cart\Cart;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -24,6 +25,13 @@ class OrderController extends Controller
                     ->make(true);
         }
        return view('Backend.order.index');
+    }
+
+    public function store(Request $request,Cart $cart)
+    {
+       $cart->content();
+       $cart->clear();
+       return response()->json(['data'=>'success created'],200);
     }
 
     public function order_details($id)

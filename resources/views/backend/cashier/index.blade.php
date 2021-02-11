@@ -89,6 +89,7 @@
         });
     });
     cashier();
+    getorders();
     function cashier()
     {
         $.ajax({
@@ -103,24 +104,66 @@
         });
     }
     $(document).on('click','.addtocard',function(){
-        addorder($(this).attr('data-id'))
+        createorder($(this).attr('data-id'));
     });
-    function addorder(el)
-    {
-        orders='';
-        order(el);
-        $('.order').html(orders);
-    }
-    function order()
+    $(document).on('click','.delete',function(){
+        deleteorder($(this).attr('data-id'));
+    });
+    $(document).on('click','.ordernow',function(){
+        $.ajax({
+            type: "post",
+            url: "{{route('order.store')}}",
+            dataType: "json",
+            success: function (response) {
+                getorders();
+            }
+        });
+    });
+    function getorders()
     {
         $.ajax({
             type: "get",
             url: "{{route('cashier.order')}}",
             dataType: "json",
             success: function (response) {
-               orders='';
-               response.forEach(el => {order(el);});
-               $('.order').html(orders);
+             orders='';
+             if (response.content.length!=0) {
+             orders+='<div class="row text-center"><div class="col-3">المنتج</div><div class="col-3">السعر</div><div class="col-3">الكمية</div><div class="col-3">#</div></div><hr>';
+             response.content.forEach(element => {
+                    order(element);
+             });
+             orders+='<hr><div class="row text-center"><div class="col-6">المجموع</div><div class="col-6">'+response.total+' جنية </div></div>';
+             orders+='<hr><div class="row text-center"><a href="javascript:void(0);" class="btn btn-info-gradient col-12 ordernow">اطلب الان</a></div>';
+             }
+             else
+             {
+                orders+='<div class="row text-center"><p class="col-12 text-center">لا يوجد منتجات في السالة</p></div>';
+             }
+             $('.order').html(orders);
+            }
+        });
+    }
+    function createorder(id)
+    {
+        $.ajax({
+            type: "get",
+            url: "{{route('cashier.createorder')}}",
+            data:{id:id},
+            dataType: "json",
+            success: function (response) {
+                getorders();
+            }
+        });
+    }
+    function deleteorder(id)
+    {
+        $.ajax({
+            type: "delete",
+            url: "{{route('cashier.order')}}/"+id,
+            data:{id:id},
+            dataType: "json",
+            success: function (response) {
+                getorders();
             }
         });
     }
@@ -141,7 +184,16 @@
     function order(el)
     {
       orders+=
-      '<a>'+el+'</a>';
+      '<div class="row">'+
+         '<div class="col-3 p-2">'+
+            '<img class="rounded-circle" src="'+el.image_path+'">'+
+          '</div>'+
+          '<div class="col-3 p-2 m-auto text-center">'+ el.price+'</div>'+
+          '<div class="col-3 p-2 m-auto text-center">'+ el.quantity+'</div>'+
+          '<div class="col-3 p-2 m-auto text-center">'+
+            '<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-trash"></i></a>'+
+          '</div>'+
+      '</div>';
     }
 
  </script>
