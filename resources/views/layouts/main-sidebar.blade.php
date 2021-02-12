@@ -42,6 +42,12 @@
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('menu.index' ) }}"><span class="side-menu__label">القوائم</a>
 					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
+					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">المطبخ</a>
+					</li>
                      {{--  @can('المنتجات')  --}}
                     <li class="slide">
                         <a class="side-menu__item" href="{{ route('product.index' ) }}"><span class="side-menu__label">المنتجات</a>

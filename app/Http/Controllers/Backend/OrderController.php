@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Cart\Cart;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateOrderRequest;
+use App\Models\CashierOrder;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
@@ -27,9 +29,12 @@ class OrderController extends Controller
        return view('Backend.order.index');
     }
 
-    public function store(Request $request,Cart $cart)
+    public function store(CreateOrderRequest $request,Cart $cart)
     {
-       $cart->content();
+       $order=CashierOrder::create($request->validated());
+       foreach ($cart->content() as $key => $content) {
+         OrderDetails::create(['product_id'=>$content['productid'],'price'=>$content['price'],'total_price'=>$content['total_price'],'order_id'=>$order->id,'name'=>$content['name'],'quantity'=>$content['quantity']]);
+       }
        $cart->clear();
        return response()->json(['data'=>'success created'],200);
     }

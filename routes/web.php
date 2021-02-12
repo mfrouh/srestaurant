@@ -54,6 +54,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.createorder');
    Route::get('/cart', 'Backend\CartController@index')->name('cashier.order');
    Route::delete('/cart/{id}', 'Backend\CartController@destroy')->name('cashier.deleteorder');
+   Route::get('/kitchen', 'Backend\KitchenController@index')->name('kitchen');
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 
 

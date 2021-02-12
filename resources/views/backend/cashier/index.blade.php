@@ -73,6 +73,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     $('#search').submit(function (e) {
         e.preventDefault();
         var data=$(this).serialize();
@@ -88,8 +89,9 @@
             }
         });
     });
-    cashier();
-    getorders();
+
+    cashier();getorders();
+
     function cashier()
     {
         $.ajax({
@@ -103,22 +105,36 @@
             }
         });
     }
+
     $(document).on('click','.addtocard',function(){
         createorder($(this).attr('data-id'));
     });
+
     $(document).on('click','.delete',function(){
+        var el=$(this);
+        $(this).addClass('disabled');
         deleteorder($(this).attr('data-id'));
     });
+
     $(document).on('click','.ordernow',function(){
+        type='inrestaurant';
+        payment_type='cash';
+        created_by={{auth()->id()}};
+        total_price=$('#totalprice').attr('data-id');
+        var el=$(this);
+        $(this).addClass('disabled');
         $.ajax({
             type: "post",
             url: "{{route('order.store')}}",
+            data:{type:type,payment_type:payment_type,created_by:created_by,total_price:total_price},
             dataType: "json",
             success: function (response) {
                 getorders();
+                el.removeClass('disabled');
             }
         });
     });
+
     function getorders()
     {
         $.ajax({
@@ -132,7 +148,7 @@
              response.content.forEach(element => {
                     order(element);
              });
-             orders+='<hr><div class="row text-center"><div class="col-6">المجموع</div><div class="col-6">'+response.total+' جنية </div></div>';
+             orders+='<hr><div class="row text-center"><div class="col-6">المجموع</div><div class="col-6" id="totalprice" data-id="'+response.total+'">'+response.total+' جنية </div></div>';
              orders+='<hr><div class="row text-center"><a href="javascript:void(0);" class="btn btn-info-gradient col-12 ordernow">اطلب الان</a></div>';
              }
              else
@@ -143,6 +159,7 @@
             }
         });
     }
+
     function createorder(id)
     {
         $.ajax({
@@ -155,6 +172,7 @@
             }
         });
     }
+
     function deleteorder(id)
     {
         $.ajax({
@@ -164,9 +182,11 @@
             dataType: "json",
             success: function (response) {
                 getorders();
+                el.removeClass('disabled');
             }
         });
     }
+
     function product(el)
     {
       products+=
@@ -181,6 +201,7 @@
      ' </div>'+
      '</div>';
     }
+
     function order(el)
     {
       orders+=
@@ -195,6 +216,5 @@
           '</div>'+
       '</div>';
     }
-
  </script>
 @endsection

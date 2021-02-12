@@ -135,8 +135,9 @@ class Cart
                 $product=Product::find($value->productid);
             }
             $cart[$i]['id']=$value->id;
-            $cart[$i]['productid']=$product->productid;
+            $cart[$i]['productid']=$product->id;
             $cart[$i]['quantity']=$value->quantity;
+            $cart[$i]['name']=$product->name;
             $cart[$i]['image_path']=$product->image_path;
             $cart[$i]['price']=$product->priceafteroffer;
             $cart[$i]['total_price']=$value->quantity*$product->priceafteroffer;
