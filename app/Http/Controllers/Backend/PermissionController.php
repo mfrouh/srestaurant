@@ -28,8 +28,11 @@ class PermissionController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editpermission"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                           $btn='';
+                           if(auth()->user()->can('تعديل صلاحية'))
+                           $btn.= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editpermission"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
+                           if(auth()->user()->can('حذف صلاحية'))
+                           $btn.= '<a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])

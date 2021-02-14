@@ -32,14 +32,18 @@ class MenuController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn='';
+                        if(auth()->user()->can('تغير حالة قائمة')){
                         if ($row->status=='active') {
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
                         }
                         else {
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
                         }
-                           $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editmenu"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        }
+                        if(auth()->user()->can('تعديل قائمة'))
+                           $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editmenu"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
+                        if(auth()->user()->can('حذف قائمة'))
+                           $btn .= '<a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
