@@ -11,6 +11,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء قائمة'])->only('store');
+        $this->middleware(['auth','permission:القوائم'])->only('index');
+        $this->middleware(['auth','permission:تغير حالة قائمة'])->only('status');
+        $this->middleware(['auth','permission:تعديل قائمة'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف قائمة'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -73,17 +81,6 @@ class MenuController extends Controller
     public function show(Menu $menu)
     {
         return response()->json(['data'=>$menu],200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Menu $menu)
-    {
-        //
     }
 
     /**

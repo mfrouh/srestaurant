@@ -10,13 +10,17 @@ use Illuminate\Http\Request;
 
 class ProfilesettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:المعلومات الشخصية'])->only(['index','store']);
+    }
     public function index()
     {
       return view('Backend.setting.profile-setting');
     }
 
     public function store(Request $request)
-   {
+    {
        $this->validate($request,[
            'name'=>'required',
            'email'=>'required|unique:users,email,'.auth()->user()->id,
@@ -31,6 +35,5 @@ class ProfilesettingController extends Controller
        }
        $user->save();
        return back()->with('success','تم التعديل البيانات بنجاح');
-
-   }
+    }
 }

@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\DB;
 
 class VariantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء نوع'])->only('store');
+        $this->middleware(['auth','permission:الانواع'])->only('index');
+        $this->middleware(['auth','permission:تعديل نوع'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف نوع'])->only('destroy');
+    }
+
     public function index(Request $request)
     {
       if ($request->ajax()) {

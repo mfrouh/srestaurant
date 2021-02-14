@@ -11,19 +11,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:الوظائف'])->only('index');
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:انشاء وظيفة'])->only(['create','store']);
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:مشاهد وظيفة'])->only('show');
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:تعديل وظيفة'])->only(['edit','update']);
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:حذف وظيفة'])->only('destroy');
-    // }
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:الوظائف'])->only('index');
+        $this->middleware(['auth','permission:انشاء وظيفة'])->only('store');
+        $this->middleware(['auth','permission:تعديل وظيفة'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف وظيفة'])->only('destroy');
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {

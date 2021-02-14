@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class ChangepasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:تغير كلمة المرور'])->only(['index','store']);
+    }
+
     public function index()
-   {
+    {
      return view('Backend.setting.change-password');
-   }
+    }
 
    public function store(Request $request)
    {

@@ -10,11 +10,15 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:اعداد الموقع'])->only(['index','store']);
+    }
     public function index()
-   {
+    {
     $setting=Setting::first();
     return view('Backend.setting.index',compact('setting'));
-   }
+    }
 
    public function store(Request $request)
    {

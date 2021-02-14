@@ -13,6 +13,16 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء منتج'])->only('store');
+        $this->middleware(['auth','permission:المنتجات'])->only('index');
+        $this->middleware(['auth','permission:مشاهدة منتج'])->only('showproduct');
+        $this->middleware(['auth','permission:تغير حالة منتج'])->only('status');
+        $this->middleware(['auth','permission:تعديل منتج'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف منتج'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

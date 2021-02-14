@@ -11,6 +11,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء قسم'])->only('store');
+        $this->middleware(['auth','permission:الاقسام'])->only('index');
+        $this->middleware(['auth','permission:تغير حالة قسم'])->only('status');
+        $this->middleware(['auth','permission:تعديل قسم'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف قسم'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -72,17 +80,6 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
        return response()->json(['data'=>$category],200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
     }
 
     /**

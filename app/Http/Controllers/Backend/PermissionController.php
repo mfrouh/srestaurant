@@ -14,14 +14,13 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:الصلاحيات'])->only('index');
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:انشاء صلاحية'])->only(['create','store']);
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:مشاهد صلاحية'])->only('show');
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:تعديل صلاحية'])->only(['edit','update']);
-    //     $this->middleware(['auth','role_or_permission:SuperAdmin|:حذف صلاحية'])->only('destroy');
-    // }
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:الصلاحيات'])->only('index');
+        $this->middleware(['auth','permission:انشاء صلاحية'])->only('store');
+        $this->middleware(['auth','permission:تعديل صلاحية'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف صلاحية'])->only('destroy');
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {

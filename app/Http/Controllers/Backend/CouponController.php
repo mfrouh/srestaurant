@@ -11,11 +11,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CouponController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء خصم'])->only('store');
+        $this->middleware(['auth','permission:الخصومات'])->only('index');
+        $this->middleware(['auth','permission:تعديل خصم'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف خصم'])->only('destroy');
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -33,15 +35,6 @@ class CouponController extends Controller
         return view('backend.coupon.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -66,16 +59,6 @@ class CouponController extends Controller
         return response()->json(['data'=>$coupon],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Coupon  $coupon
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Coupon $coupon)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

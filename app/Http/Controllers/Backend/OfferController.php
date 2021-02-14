@@ -12,6 +12,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OfferController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء عرض'])->only('store');
+        $this->middleware(['auth','permission:العروض'])->only('index');
+        $this->middleware(['auth','permission:تعديل عرض'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف عرض'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +42,6 @@ class OfferController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -65,17 +62,6 @@ class OfferController extends Controller
     public function show(Offer $offer)
     {
         return response()->json(['data'=>$offer],200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Offer  $offer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Offer $offer)
-    {
-        //
     }
 
     /**

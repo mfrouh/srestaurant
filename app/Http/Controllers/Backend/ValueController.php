@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ValueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:انشاء قيمة'])->only('store');
+        $this->middleware(['auth','permission:القيم'])->only('index');
+        $this->middleware(['auth','permission:تعديل قيمة'])->only(['show','update']);
+        $this->middleware(['auth','permission:حذف قيمة'])->only('destroy');
+    }
     public function index(Request $request)
     {
       if ($request->ajax()) {

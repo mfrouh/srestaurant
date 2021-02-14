@@ -21,8 +21,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MainController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:الاراء'])->only('reviews');
+        $this->middleware(['auth','permission:الرئيسية'])->only('index');
+    }
     public function index()
-  {
+    {
     $users=User::count();
     $products=Product::count();
     $actproducts=Product::active()->count();
@@ -58,12 +63,5 @@ class MainController extends Controller
                 ->make(true);
     }
     return view('Backend.review.index');
-  }
-  public function image($id)
-  {
-    $image=Image::findorfail($id);
-    Storage::delete($image->url);
-    $image->delete();
-    return back()->with('success','تم حذف الصورة بنجاح');
   }
 }

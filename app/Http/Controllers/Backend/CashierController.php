@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class CashierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:كاشير'])->only('index');
+    }
     public function index(Request $request)
     {
        if ($request->ajax()) {

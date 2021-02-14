@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class KitchenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','permission:المطبخ'])->only('index');
+        $this->middleware(['auth','permission:تفاصيل الطلب'])->only('details');
+        $this->middleware(['auth','permission:تغيير حالة الطلب'])->only('changeorder');
+        $this->middleware(['auth','permission:تغيير حالة تفاصيل الطلب'])->only('changeorderdetails');
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
