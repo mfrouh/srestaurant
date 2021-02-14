@@ -13,7 +13,9 @@
             <h4 class="content-title mb-0 my-auto"> الاقسام</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"></span>
         </div>
     </div>
-    <a href="javascript:void(0);" class="btn btn-primary btn-sm "  data-toggle="modal" data-target="#createcategory">انشاء قسم</a>
+    @can('انشاء قسم')
+      <a href="javascript:void(0);" class="btn btn-primary btn-sm "  data-toggle="modal" data-target="#createcategory">انشاء قسم</a>
+    @endcan
   </div>
   <!-- breadcrumb -->
 @endsection
@@ -35,8 +37,13 @@
       </table>
   </div>
 </div>
-<x-createcategory/>
-<x-editcategory />
+@can('انشاء قسم')
+  <x-createcategory/>
+@endcan
+@can('تعديل قسم')
+  <x-editcategory />
+@endcan
+
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

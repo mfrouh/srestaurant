@@ -12,8 +12,8 @@ class AttributeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','permission:انشاء خاصية'])->only('store');
         $this->middleware(['auth','permission:الخصائص'])->only('index');
+        $this->middleware(['auth','permission:انشاء خاصية'])->only('store');
         $this->middleware(['auth','permission:تعديل خاصية'])->only(['show','update']);
         $this->middleware(['auth','permission:حذف خاصية'])->only('destroy');
     }

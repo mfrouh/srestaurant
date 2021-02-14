@@ -40,10 +40,18 @@
         </table>
     </div>
   </div>
-  <x-createproduct :categories="$categories" :menus="$menus" />
-  <x-editproduct :categories="$categories" :menus="$menus" />
-  <x-createoffer />
-  <x-editoffer />
+@can('انشاء عرض')
+  <x-createoffer/>
+@endcan
+@can('تعديل عرض')
+  <x-editoffer/>
+@endcan
+@can('انشاء منتج')
+<x-createproduct :categories="$categories" :menus="$menus" />
+@endcan
+@can('تعديل منتج')
+<x-editproduct :categories="$categories" :menus="$menus" />
+@endcan
   @endsection
   @section('js')
   <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

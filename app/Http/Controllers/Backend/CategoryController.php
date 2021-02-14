@@ -32,14 +32,23 @@ class CategoryController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn='';
-                        if ($row->status=='active') {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
+                        if(auth()->user()->can('تغير حالة قسم'))
+                        {
+                           if ($row->status=='active') {
+                               $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
+                           }
+                           else {
+                               $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                           }
                         }
-                        else {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                        if(auth()->user()->can('تعديل قسم'))
+                        {
+                           $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcategory"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
                         }
-                           $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editcategory"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                                   <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        if(auth()->user()->can('حذف قسم'))
+                        {
+                           $btn .= '<a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        }
                             return $btn;
                     })
                     ->rawColumns(['action'])

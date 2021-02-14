@@ -33,8 +33,12 @@
         </table>
     </div>
   </div>
-  <x-createrole/>
-  <x-editrole/>
+@can('انشاء وظيفة')
+<x-createrole/>
+@endcan
+@can('تعديل وظيفة')
+<x-editrole/>
+@endcan
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

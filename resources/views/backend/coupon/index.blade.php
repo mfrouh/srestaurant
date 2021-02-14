@@ -37,8 +37,13 @@
         </table>
     </div>
   </div>
-<x-createcoupon/>
-<x-editcoupon />
+@can('انشاء خصم')
+   <x-createcoupon/>
+@endcan
+@can('تعديل خصم')
+   <x-editcoupon />
+@endcan
+
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

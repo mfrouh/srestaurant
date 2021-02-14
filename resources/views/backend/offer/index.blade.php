@@ -36,8 +36,13 @@
         </table>
     </div>
   </div>
+
+@can('انشاء عرض')
   <x-createoffer/>
+@endcan
+@can('تعديل عرض')
   <x-editoffer/>
+@endcan
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

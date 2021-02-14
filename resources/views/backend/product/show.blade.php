@@ -81,15 +81,30 @@
 <h3>الانواع</h3>
 <a href="javascript:void(0);" class="btn btn-secondary btn-sm createvariant m-2" data-id="{{$product->id}}">انشاء نوع</a>
 <div class="row variants"></div>
-  <x-editproduct :categories="$categories" :menus="$menus" />
-  <x-createoffer />
-  <x-editoffer />
-  <x-createattribute />
-  <x-editattribute />
-  <x-createvalue />
-  <x-editvalue />
-  <x-createvariant :attribute="$product->attributes" />
-  <x-editvariant />
+@can('انشاء نوع')
+<x-createvariant :attribute="$product->attributes" />
+@endcan
+@can('انشاء خاصية')
+<x-createattribute />
+@endcan
+@can('تعديل خاصية')
+<x-editattribute />
+@endcan
+@can('انشاء نوع')
+<x-createvalue />
+@endcan
+@can('تعديل نوع')
+<x-editvalue />
+@endcan
+@can('انشاء عرض')
+  <x-createoffer/>
+@endcan
+@can('تعديل عرض')
+  <x-editoffer/>
+@endcan
+@can('تعديل منتج')
+<x-editproduct :categories="$categories" :menus="$menus" />
+@endcan
 @endsection
 @section('js')
   <script type="text/javascript">

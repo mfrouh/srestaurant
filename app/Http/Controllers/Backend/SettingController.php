@@ -12,7 +12,7 @@ class SettingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','permission:اعداد الموقع'])->only(['index','store']);
+        $this->middleware(['auth','permission:اعدادات الموقع'])->only(['index','store']);
     }
     public function index()
     {

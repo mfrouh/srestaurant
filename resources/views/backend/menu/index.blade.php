@@ -34,8 +34,12 @@
         </table>
     </div>
   </div>
-  <x-createmenu/>
-  <x-editmenu/>
+@can('انشاء قائمة')
+   <x-createmenu/>
+@endcan
+@can('تعديل قائمة')
+   <x-editmenu/>
+@endcan
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

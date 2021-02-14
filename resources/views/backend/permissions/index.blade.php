@@ -33,8 +33,12 @@
         </table>
     </div>
   </div>
-  <x-createpermission/>
-  <x-editpermission/>
+@can('انشاء صلاحية')
+<x-createpermission/>
+@endcan
+@can('تعديل صلاحية')
+<x-editpermission/>
+@endcan
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>

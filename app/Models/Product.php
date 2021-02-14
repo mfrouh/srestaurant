@@ -20,7 +20,7 @@ class Product extends Model
         parent::boot();
         static::saving(function ($model) {
             $model->slug = str_replace(' ','_',$model->name);
-            $model->sku = 'p'.$model->id;
+            //$model->sku = 'p'.$model->id;
         });
     }
 
@@ -48,11 +48,11 @@ class Product extends Model
     {
       return  $this->status=="active"?'مفعل':'مغلق';
     }
-    public function setImageAttribute($value)
-    {
-        Image::make($value)->resize(500,500)->save('images/products/'.$this->name.$this->catgory_id.'.png');
-        $this->attributes['image']='images/products/'.$this->name.$this->catgory_id.'.png';
-    }
+    // public function setImageAttribute($value)
+    // {
+    //     Image::make($value)->resize(500,500)->save('images/products/'.$this->name.$this->catgory_id.'.png');
+    //     $this->attributes['image']='images/products/'.$this->name.$this->catgory_id.'.png';
+    // }
     public function gallery()
     {
       return $this->morphMany(Image::class,'imageable');

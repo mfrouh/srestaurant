@@ -23,7 +23,7 @@ class MainController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','permission:الاراء'])->only('reviews');
+        $this->middleware(['auth','permission:الأراء'])->only('reviews');
         $this->middleware(['auth','permission:الرئيسية'])->only('index');
     }
     public function index()

@@ -33,20 +33,17 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('attribute', 'Backend\AttributeController')->except(['edit','create']);
    Route::resource('value', 'Backend\ValueController')->except(['edit','create']);
    Route::resource('variant', 'Backend\VariantController')->except(['edit','create']);
-
-
+   //setting  website
+   Route::resource('/setting', 'Backend\SettingController')->only(['index','store']);
+   //personal information
+   Route::resource('/change-password', 'Backend\ChangepasswordController')->only(['index','store']);
+   Route::resource('/profile-setting', 'Backend\ProfilesettingController')->only(['index','store']);
+   //change status
    Route::post('category/status', 'Backend\CategoryController@status');
    Route::post('menu/status', 'Backend\MenuController@status');
    Route::post('product/status', 'Backend\ProductController@status');
+   //show product page
    Route::get('product/show/{id}', 'Backend\ProductController@showproduct')->name('showproduct');
-   //setting  website
-   Route::get('/setting', 'Backend\SettingController@index')->name('setting.index');
-   Route::post('/setting', 'Backend\SettingController@store')->name('setting.store');
-   //personal information
-   Route::get('/change-password', 'Backend\ChangepasswordController@index')->name('change-password.index');
-   Route::post('/change-password', 'Backend\ChangepasswordController@store')->name('change-password.store');
-   Route::get('/profile-setting', 'Backend\ProfilesettingController@index')->name('profile-setting.index');
-   Route::post('/profile-setting', 'Backend\ProfilesettingController@store')->name('profile-setting.store');
    //dashboard
    Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
    //cashier
@@ -61,8 +58,5 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::post('/kitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('kitchen.changeorderdetails');
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
-
-
-
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

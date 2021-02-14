@@ -22,57 +22,76 @@
 					</div>
 				</div>
 				<ul class="side-menu">
+                    @can('الرئيسية')
 					<li class="slide">
 						<a class="side-menu__item" href="{{ route('dashboard.index') }}"><span class="side-menu__label">الرئيسية</a>
                     </li>
-                   {{--  @can('الوظائف')  --}}
+                    @endcan
+                    @can('الوظائف')
                     <li class="slide">
-					     	<a class="side-menu__item" href="{{ route('roles.index') }}"><span class="side-menu__label">الوظائف</a>
+					    <a class="side-menu__item" href="{{ route('roles.index') }}"><span class="side-menu__label">الوظائف</a>
                     </li>
-
-                    {{--  @can('الصلاحيات')  --}}
+                    @endcan
+                    @can('الصلاحيات')
                     <li class="slide">
-					     	<a class="side-menu__item" href="{{ route('permissions.index') }}"><span class="side-menu__label">الصلاحيات</a>
+					    <a class="side-menu__item" href="{{ route('permissions.index') }}"><span class="side-menu__label">الصلاحيات</a>
                     </li>
-                    {{--  @can('الاقسام')  --}}
+                    @endcan
+                    @can('الاقسام')
                     <li class="slide">
-					       	<a class="side-menu__item" href="{{ route('category.index' ) }}"><span class="side-menu__label">الاقسام</a>
+					    <a class="side-menu__item" href="{{ route('category.index' ) }}"><span class="side-menu__label">الاقسام</a>
                     </li>
-                    {{--  @endcan  --}}
+                    @endcan
+                    @can('القوائم')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('menu.index' ) }}"><span class="side-menu__label">القوائم</a>
 					</li>
+                    @endcan
+                    @can('كاشير')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
 					</li>
+                    @endcan
+                    @can('المطبخ')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">المطبخ</a>
 					</li>
-                     {{--  @can('المنتجات')  --}}
+                    @endcan
+                    @can('المنتجات')
                     <li class="slide">
                         <a class="side-menu__item" href="{{ route('product.index' ) }}"><span class="side-menu__label">المنتجات</a>
                     </li>
+                    @endcan
+                    @can('الخصومات')
                     <li class="slide">
 					    <a class="side-menu__item" href="{{ route('coupon.index' ) }}"><span class="side-menu__label">الخصومات</a>
                     </li>
+                    @endcan
+                    @can('العروض')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('offer.index' ) }}"><span class="side-menu__label">العروض</a>
                     </li>
+                    @endcan
+                    @can('الطلبات')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('order.index' ) }}"><span class="side-menu__label">الطلبات</a>
                     </li>
+                    @endcan
+                    @can('كلمات لها علاقة')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('tag.index' ) }}"><span class="side-menu__label">كلمات لها علاقة</a>
                     </li>
+                    @endcan
+                    @can('الأراء')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('review.index' ) }}"><span class="side-menu__label">الأراء</a>
                     </li>
-                    {{--  @endcan  --}}
-					{{--  @can('تعديل الموقع')  --}}
+                    @endcan
+					@can('اعدادات الموقع')
 					<li class="slide">
 						<a class="side-menu__item" href="{{ route('setting.index' ) }}"><span class="side-menu__label">الاعدادات</a>
 					</li>
-					{{--  @endcan  --}}
+					@endcan
 				</ul>
 			</div>
 		</aside>
