@@ -37,10 +37,22 @@ class CashierController extends Controller
        return view('backend.cashier.index',compact('categories','menus'));
     }
 
-    public function order(Request $request,Cart $cart)
+    public function createorder(Request $request,Cart $cart)
     {
        $product=Product::findOrfail($request->id);
        $cart->CreateORUpdate($product->id,$product->sku);
        return response()->json($cart->content());
     }
+
+    public function order(Cart $cart)
+    {
+       return response()->json(['content'=>$cart->content(),'total'=>$cart->total()]);
+    }
+
+    public function destroy($id,Cart $cart)
+    {
+       $cart->destroy($id);
+       return response()->json(['data'=>'success deleted'],200);
+    }
+
 }

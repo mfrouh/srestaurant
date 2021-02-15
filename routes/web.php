@@ -33,9 +33,9 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('attribute', 'Backend\AttributeController')->except(['edit','create']);
    Route::resource('value', 'Backend\ValueController')->except(['edit','create']);
    Route::resource('variant', 'Backend\VariantController')->except(['edit','create']);
+   //set permissions to role
    Route::post('roles/role_permissions', 'Backend\RoleController@role_permissions')->name('role_permissions');
    Route::get('roles/role_permissions/{id}', 'Backend\RoleController@getrolepermissions')->name('getrolepermissions');
-
    //setting  website
    Route::resource('/setting', 'Backend\SettingController')->only(['index','store']);
    //personal information
@@ -51,9 +51,9 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/dashboard', 'Backend\MainController@index')->name('dashboard.index');
    //cashier
    Route::get('/cashier', 'Backend\CashierController@index')->name('cashier');
-   Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.createorder');
-   Route::get('/cart', 'Backend\CartController@index')->name('cashier.order');
-   Route::delete('/cart/{id}', 'Backend\CartController@destroy')->name('cashier.deleteorder');
+   Route::get('/cashier/createorder', 'Backend\CashierController@createorder')->name('cashier.createorder');
+   Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
+   Route::delete('/cashier/order/{id}', 'Backend\CashierController@destroy')->name('cashier.deleteorder');
    //kitchen
    Route::get('/kitchen', 'Backend\KitchenController@index')->name('kitchen');
    Route::post('/kitchen', 'Backend\KitchenController@details')->name('kitchen.orderdetails');
