@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
                 // \App\Models\User::factory(10)->create();
                 Setting::create(['name'=>'your website name','description'=>'your website description','logo'=>'images/logo/1.png']);
-                $roles=['سوبر ادمن','مالك','مشرف','كاشير','طباخ','أمن','عامل توصيل'];
+                $roles=['سوبر ادمن','مالك','مشرف','كاشير','طباخ','مستخدم','عامل توصيل'];
                 foreach ($roles as $key => $role) {Role::create(['name'=>$role]);}
                 $permissions=['نوع','قيمة','وظيفة','منتج','قائمة','خاصية','قسم','خصم','عرض','صلاحية'];
                 foreach ($permissions as $key => $permission) {
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
                         Permission::create(['name'=>"تغير حالة $permission"]);
                     }
                  }
-                $permissions2=['تغيير حالة تفاصيل الطلب','تغيير حالة الطلب','تفاصيل الطلب','المطبخ','مشاهدة منتج','اعدادات الموقع','الأراء','العروض','الانواع','القيم','القوائم','المنتجات','الخصومات','الاقسام','تغير كلمة المرور','الخصائص','الصلاحيات','الوظائف','المعلومات الشخصية'];
+                $permissions2=['مشاهدة منتج','اعدادات الموقع','الأراء','العروض','الانواع','القيم','القوائم','المنتجات','الخصومات','الاقسام','تغير كلمة المرور','الخصائص','الصلاحيات','الوظائف','المعلومات الشخصية'];
                 foreach ($permissions2 as $key => $permission) {
                     Permission::create(['name'=>"$permission"]);
                 }

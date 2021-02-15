@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('category', 'Backend\CategoryController')->except(['edit','create']);
+   Route::resource('employee', 'Backend\EmployeeController')->except(['edit','create','show']);
    Route::resource('coupon', 'Backend\CouponController')->except(['edit','create']);
    Route::resource('menu', 'Backend\MenuController')->except(['edit','create']);
    Route::resource('offer', 'Backend\OfferController')->except(['edit','create']);
@@ -35,6 +36,8 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('attribute', 'Backend\AttributeController')->except(['edit','create']);
    Route::resource('value', 'Backend\ValueController')->except(['edit','create']);
    Route::resource('variant', 'Backend\VariantController')->except(['edit','create']);
+   //employee  roles
+   Route::get('employee/roles', 'Backend\EmployeeController@roles')->name('employee.roles');
    //set permissions to role
    Route::post('roles/role_permissions', 'Backend\RoleController@role_permissions')->name('role_permissions');
    Route::get('roles/role_permissions/{id}', 'Backend\RoleController@getrolepermissions')->name('getrolepermissions');
@@ -64,4 +67,4 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
