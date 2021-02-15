@@ -37,22 +37,30 @@ class ProductController extends Controller
                     ->addColumn('action', function($row){
                         $btn='';
                         $route=route('showproduct',[$row->id]);
-                        if ($row->status=='active') {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
-                        }
-                        else {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                        if(auth()->user()->can('تغير حالة منتج')){
+                           if ($row->status=='active') {
+                               $btn.='<a href="javascript:void(0);" class="edit btn btn-secondary m-1 btn-sm changestatus"  data-id="'.$row->id.'">غلق</a>';
+                           }
+                           else {
+                               $btn.='<a href="javascript:void(0);" class="edit btn btn-info m-1 btn-sm changestatus"  data-id="'.$row->id.'">تشغيل</a>';
+                           }
                         }
                         if ($row->offer) {
-                            $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>
-                                   <a href="javascript:void(0);" class="edit btn btn-dark m-1 btn-sm canceloffer"  data-id="'.$row->offer->id.'">الغاء عرض</a>';
+                            if(auth()->user()->can('تعديل عرض'))
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-pink m-1 btn-sm editoffer"  data-id="'.$row->offer->id.'">تعديل عرض</a>';
+                            if(auth()->user()->can('حذف عرض'))
+                            $btn.='<a href="javascript:void(0);" class="edit btn btn-dark m-1 btn-sm canceloffer"  data-id="'.$row->offer->id.'">الغاء عرض</a>';
                         }
                         else {
+                            if(auth()->user()->can('انشاء عرض'))
                             $btn.='<a href="javascript:void(0);" class="edit btn btn-success m-1 btn-sm createoffer"  data-id="'.$row->id.'">انشاء عرض</a>';
                         }
-                        $btn .= '<a href="'.$route.'" class="edit btn btn-success m-1 btn-sm"><i class="fa fa-eye"></i></a>
-                                 <a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>
-                                 <a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+                        if(auth()->user()->can('مشاهدة منتج'))
+                        $btn .= '<a href="'.$route.'" class="edit btn btn-success m-1 btn-sm"><i class="fa fa-eye"></i></a>';
+                        if(auth()->user()->can('تعديل منتج'))
+                        $btn .= '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editproduct"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
+                        if(auth()->user()->can('حذف منتج'))
+                        $btn .='<a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])

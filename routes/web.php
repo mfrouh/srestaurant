@@ -33,6 +33,9 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('attribute', 'Backend\AttributeController')->except(['edit','create']);
    Route::resource('value', 'Backend\ValueController')->except(['edit','create']);
    Route::resource('variant', 'Backend\VariantController')->except(['edit','create']);
+   Route::post('roles/role_permissions', 'Backend\RoleController@role_permissions')->name('role_permissions');
+   Route::get('roles/role_permissions/{id}', 'Backend\RoleController@getrolepermissions')->name('getrolepermissions');
+
    //setting  website
    Route::resource('/setting', 'Backend\SettingController')->only(['index','store']);
    //personal information

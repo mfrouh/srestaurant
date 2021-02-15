@@ -42,16 +42,6 @@ class PermissionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('Backend.permissions.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -76,18 +66,6 @@ class PermissionController extends Controller
     {
        $permission=Permission::findById($id);
        return response()->json(['data'=>$permission],200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $permission=Permission::findById($id);
-        return view('Backend.permissions.edit',compact('permission'));
     }
 
     /**

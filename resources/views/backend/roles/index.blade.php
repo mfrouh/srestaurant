@@ -39,6 +39,7 @@
 @can('تعديل وظيفة')
 <x-editrole/>
 @endcan
+<x-permissionstorole/>
 @endsection
 @section('js')
 <script type="text/javascript" charset="utf8" src="{{asset('js/datatables.js')}}"></script>
@@ -117,6 +118,43 @@
             $('#editrole').modal('toggle');
            }
        });
+   });
+   $(document).on('click','.permissions',function(){
+       var id=$(this).attr('data-id');
+    $.ajax({
+           type: "get",
+           url: "{{route('role_permissions')}}/"+id,
+           dataType: "json",
+           success: function (response) {
+            $('#rolename').val(response.role.name);
+            $('#roleid').val(response.role.id);
+             permission='';
+             response.permissions.forEach(element => {
+                 checked='';
+                 if (response.rolepermissions.includes(element.id)) {
+                    checked='checked';
+                 }
+                permission+=
+                '<label class="btn btn-light m-1" >'+
+                 '<input type="checkbox" name="permissions[]"  '+checked+'  value="'+element.id+'">'+element.name+'</label>';
+             });
+             $('.perm').html(permission);
+            $('#permissionstorole').modal('toggle');
+           }
+       });
+   });
+   $('#permissionrole').submit(function (e) {
+       e.preventDefault();
+      var data=$('#permissionrole').serialize();
+      $.ajax({
+          type: "post",
+          url: "{{route('role_permissions')}}",
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            $('#permissionstorole').modal('toggle');
+          }
+      });
    });
   </script>
 @endsection
