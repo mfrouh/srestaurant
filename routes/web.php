@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // $pdf = App::make('dompdf.wrapper');
+    // $pdf->loadview('welcome');
+    // return $pdf->stream();
     return view('welcome');
 });
 Auth::routes();

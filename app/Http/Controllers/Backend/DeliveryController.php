@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
-    //
+    public function index()
+    {
+
+    }
 }

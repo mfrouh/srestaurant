@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -129,4 +129,18 @@
             </div>
         </div>
     </body>
+</html> --}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+   <style>
+    .page-break {
+        page-break-after: always;
+    }
+    </style>
+    </head>
+    <h1>كان 1</h1>
+    <img src="/images/products/1.png">
+    <div class="page-break"></div>
+    <h1>Page 2</h1>
 </html>
