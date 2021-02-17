@@ -16,10 +16,10 @@ class CreateValuesTable extends Migration
         Schema::create('values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_id');
-            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade')->onUpdate('cascade');
             $table->string('value');
             $table->unique(['attribute_id','value']);
             $table->timestamps();
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

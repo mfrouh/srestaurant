@@ -6,9 +6,9 @@
                     $setting=App\Models\Setting::first();
                 @endphp
 				<a class="desktop-logo logo-light active" href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="main-logo" alt="logo"></a>
-				<a class="desktop-logo logo-dark active" href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="main-logo dark-theme" alt="logo"></a>
-				<a class="logo-icon mobile-logo icon-light active" href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-icon" alt="logo"></a>
-				<a class="logo-icon mobile-logo icon-dark active" href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
+				<a class="desktop-logo logo-dark active" href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="main-logo dark-theme" alt="logo"></a>
+				<a class="logo-icon mobile-logo icon-light active" href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="logo-icon" alt="logo"></a>
+				<a class="logo-icon mobile-logo icon-dark active" href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="logo-icon dark-theme" alt="logo"></a>
 			</div>
 			<div class="main-sidemenu">
 				<div class="app-sidebar__user clearfix">
@@ -47,6 +47,11 @@
 						<a class="side-menu__item" href="{{ route('menu.index' ) }}"><span class="side-menu__label">القوائم</a>
 					</li>
                     @endcan
+                    @can('الموظفين')
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('employee.index') }}"><span class="side-menu__label">الموظفين</a>
+					</li>
+                    @endcan
                     @can('كاشير')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
@@ -55,6 +60,11 @@
                     @can('المطبخ')
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">المطبخ</a>
+					</li>
+                    @endcan
+                    @can('التوصيل للمنازل')
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('delivery') }}"><span class="side-menu__label">التوصيل للمنازل</a>
 					</li>
                     @endcan
                     @can('المنتجات')

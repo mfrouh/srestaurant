@@ -27,11 +27,11 @@ class RoleController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                            $btn='';
+                           $btn.='<a href="javascript:void(0);" class="permissions btn btn-success m-1 btn-sm" data-id="'.$row->id.'"> اعطاء صلاحيات '.$row->name.'</a>';
                            if(auth()->user()->can('تعديل وظيفة'))
                            $btn.='<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm editrole"  data-id="'.$row->id.'"><i class="fa fa-edit"></i></a>';
                            if(auth()->user()->can('حذف وظيفة'))
                            {$btn.='<a href="javascript:void(0);" class="delete btn btn-danger m-1 btn-sm" data-id="'.$row->id.'"><i class="fa fa-trash"></i></a>';}
-                            $btn.='<a href="javascript:void(0);" class="permissions btn btn-success m-1 btn-sm" data-id="'.$row->id.'"> اعطاء صلاحيات '.$row->name.'</a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])

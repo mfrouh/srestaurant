@@ -25,10 +25,11 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->string('sku')->unique();
             $table->foreignId('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('menu_id');
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

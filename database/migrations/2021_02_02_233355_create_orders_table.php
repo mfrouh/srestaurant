@@ -16,12 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('address_id')->nullable();
-            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('supervisor_by')->nullable();
+            $table->foreignId('delivery_by')->nullable();
             $table->foreignId('created_by')->nullable();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('status',['Pending','Shipped','Delivered','Processing'])->default('Pending');
+            $table->enum('status',['Pending','Processing','EndProcessing','Delivery','Completed'])->default('Pending');
             $table->enum('type',['delivery','takeaway','inrestaurant']);
             $table->dateTime('delivery_time')->nullable();
             $table->decimal('total_price');
@@ -31,6 +30,15 @@ class CreateOrdersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('note_for_driver')->nullable();
             $table->timestamps();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('delivery_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('supervisor_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+
+
+
         });
     }
 

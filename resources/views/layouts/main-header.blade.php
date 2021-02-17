@@ -3,10 +3,13 @@
 				<div class="container-fluid">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
-							<a href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
-							<a href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="dark-logo-1" alt="logo"></a>
-							<a href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-2" alt="logo"></a>
-							<a href="{{ url('/') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="dark-logo-2" alt="logo"></a>
+                            @php
+                               $setting=App\Models\Setting::first();
+                            @endphp
+							<a href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="logo-1" alt="logo"></a>
+							<a href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="dark-logo-1" alt="logo"></a>
+							<a href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="logo-2" alt="logo"></a>
+							<a href="{{ url('/') }}"><img src="{{URL::asset($setting->logo)}}" class="dark-logo-2" alt="logo"></a>
 						</div>
 						<div class="app-sidebar__toggle" data-toggle="sidebar">
 							<a class="open-toggle" href="#"><i class="header-icon fe fe-align-left" ></i></a>

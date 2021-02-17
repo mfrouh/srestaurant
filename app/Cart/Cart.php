@@ -113,7 +113,7 @@ class Cart
               else{return  self::create($productid,$sku,$variant=null,$quantity);}
     }
 
-     // Get Total Price In Cart
+    // Get Total Price In Cart
 
     public function total()
     {
@@ -123,6 +123,8 @@ class Cart
        }
        return $total;
     }
+
+    // Get All Content In Cart
 
     public function content()
     {

@@ -1,7 +1,10 @@
 <!-- Title -->
 <title> @yield('title') </title>
 <!-- Favicon -->
-<link rel="icon" href="{{URL::asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
+@php
+$setting=App\Models\Setting::first();
+@endphp
+<link rel="icon" href="{{URL::asset($setting->logo)}}" type="image/x-icon"/>
 <!-- Icons css -->
 <link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
 <!--  Custom Scroll bar-->
