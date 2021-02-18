@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('supervisor_by')->nullable();
             $table->foreignId('delivery_by')->nullable();
             $table->foreignId('created_by')->nullable();
+            $table->string('status_order_complete')->default(0);
             $table->enum('status',['Pending','Processing','EndProcessing','Delivery','Completed'])->default('Pending');
             $table->enum('type',['delivery','takeaway','inrestaurant']);
             $table->dateTime('delivery_time')->nullable();

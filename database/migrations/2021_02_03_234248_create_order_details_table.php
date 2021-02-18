@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreignId('variant_id')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->enum('status',['Pending','Prepare','Completed'])->default('Pending');
+            $table->enum('status_order_complete',[0,1,2])->default(0);
             $table->string('name');
             $table->decimal('price');
             $table->decimal('total_price');

@@ -118,12 +118,13 @@
     }
     function oneorder(el)
     {
-       var status='';
-      if (el.status=="Processing") { status='bg-warning';}
-      order+='<tr class="'+status+'"><td>'+el.id+'</td><td>'+el.type+'</td><td>'+
+      var status='';
+      if (el.status=="Processing") { status='bg-warning';} if (el.status=="EndProcessing") { status='bg-primary';}
+      order+='<tr class="'+status+'"><td>'+el.id+'</td><td>'+el.type_order+'</td><td>'+
         '<select class="form-control changestatusorder" data-id="'+el.id+'">'+
         '<option value="Pending" '+checkselected(el.status,'Pending')+'>لم يطبخ بعد</option>'+
         '<option value="Processing" '+checkselected(el.status,'Processing')+'>يطبخ الان</option>'+
+        '<option value="EndProcessing" '+checkselected(el.status,'EndProcessing')+'>اكتمل الطبخ</option>'+
         '</select></td><td><a href="javascript:void(0);" class="btn btn-success-gradient btn-sm showdetails" data-id="'+el.id+'">التفاصيل</a></td></tr>';
     }
     function checkselected(selected,sel)
