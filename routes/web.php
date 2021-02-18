@@ -59,11 +59,14 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/cashier/createorder', 'Backend\CashierController@createorder')->name('cashier.createorder');
    Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
    Route::delete('/cashier/order/{id}', 'Backend\CashierController@destroy')->name('cashier.deleteorder');
-   //kitchen
-   Route::get('/kitchen', 'Backend\KitchenController@index')->name('kitchen');
-   Route::post('/kitchen', 'Backend\KitchenController@details')->name('kitchen.orderdetails');
-   Route::post('/kitchen/changeorder', 'Backend\KitchenController@changeorder')->name('kitchen.changeorder');
-   Route::post('/kitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('kitchen.changeorderdetails');
+   //Supervisor Kitchen
+   Route::get('/superkitchen', 'Backend\SupervisorKitchenController@index')->name('kitchen');
+   Route::post('/superkitchen', 'Backend\SupervisorKitchenController@details')->name('kitchen.orderdetails');
+   Route::post('/superkitchen/changeorder', 'Backend\SupervisorKitchenController@changeorder')->name('kitchen.changeorder');
+   Route::post('/superkitchen/selectchef', 'Backend\SupervisorKitchenController@selectchef')->name('kitchen.selectchef');
+   //chef kitchen
+   Route::get('/chefkitchen', 'Backend\KitchenController@index')->name('chefkitchen');
+   Route::post('/chefkitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('chefkitchen.changeorderdetails');
    //delivery
    Route::get('/delivery', 'Backend\DeliveryController@index')->name('delivery');
 
