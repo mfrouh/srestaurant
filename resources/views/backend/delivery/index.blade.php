@@ -43,7 +43,7 @@
     {
       $.ajax({
           type: "get",
-          url: "{{route('superdelivery')}}",
+          url: "{{route('delivery')}}",
           dataType: "json",
           success: function (response) {
             orders='';
@@ -61,7 +61,7 @@
         localStorage.setItem('detailsid',id);
       $.ajax({
           type: "post",
-          url: "{{route('kitchen.orderdetails')}}",
+          url: "{{route('delivery.orderdetails')}}",
           data:{id:id},
           dataType: "json",
           success: function (response) {

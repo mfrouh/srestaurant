@@ -73,6 +73,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::post('/superdelivery/selectdelivery', 'Backend\SupervisorDeliveryController@selectdelivery')->name('superdelivery.selectdelivery');
    //delivery
    Route::get('/delivery', 'Backend\DeliveryController@index')->name('delivery');
+   Route::post('/delivery', 'Backend\DeliveryController@details')->name('delivery.orderdetails');
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 });
