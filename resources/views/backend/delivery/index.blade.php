@@ -17,11 +17,101 @@
 <div class="row">
     <div class="col-md-8">
         <div class="card">
-          <div class="card-header">طلبات للمنازل</div>
-          <div class="card-body">
+          <div class="card-header  bg-success-gradient text-center">طلبات للمنازل</div>
+          <div class="card-body orders">
           </div>
         </div>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success-gradient text-center">التفاصيل</div>
+            <div class="card-body details"></div>
+        </div>
+    </div>
 </div>
+@endsection
+@section('js')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).on('click','.showdetails',function(){var id=$(this).attr('data-id'); details(id);});
+    getorders();
+    function getorders()
+    {
+      $.ajax({
+          type: "get",
+          url: "{{route('superdelivery')}}",
+          dataType: "json",
+          success: function (response) {
+            orders='';
+            order='';
+            response.forEach(element => {
+              oneorder(element);
+            });
+            allorders();
+            $('.orders').html(orders);
+          }
+      });
+    }
+    function details(id)
+    {
+        localStorage.setItem('detailsid',id);
+      $.ajax({
+          type: "post",
+          url: "{{route('kitchen.orderdetails')}}",
+          data:{id:id},
+          dataType: "json",
+          success: function (response) {
+            adetails=''; detail='';;
+            response.details.forEach(element => {
+                onedetail(element);
+            });
+            alldetails();
+            $('.details').html(adetails);
+          }
+      });
+    }
+    function allorders()
+    {
+      orders+=
+         '<table class="table text-center">'+
+           '<thead>'+
+             '<th>رقم الطلب</th>'+
+             '<th>عنوان الطلب</th>'+
+             '<th>شارع الطلب</th>'+
+             '<th>معلومات عن الطلب</th>'+
+             '<th>التفاصيل</th>'+
+           '</thead>'+
+             '<tbody>'+order+'</tbody>'+
+         '</table>';
+    }
+    function oneorder(el)
+    {
+      order+=
+       '<tr>'+
+        '<td>'+el.id+'</td>'+
+        '<td>'+el.address.address+'</td>'+
+        '<td>'+el.address.street+'</td>'+
+        '<td>'+el.note_for_driver+'</td>'+
+        '<td><a href="javascript:void(0);" class="btn btn-success-gradient btn-sm showdetails" data-id="'+el.id+'">التفاصيل</a></td></tr>';
+    }
+    function alldetails()
+    {
+        adetails+=
+         '<table class="table text-center">'+
+           '<thead>'+
+             '<th>المنتج</th>'+
+             '<th>الكمية</th>'+
+           '</thead>'+
+             '<tbody>'+detail+'</tbody>'+
+         '</table>';
+    }
+    function onedetail(el)
+    {
+       detail+='<tr class="'+status+'"><td>'+el.name+'</td><td>'+el.quantity+'</td></tr>';
+    }
+</script>
 @endsection

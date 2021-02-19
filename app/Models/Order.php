@@ -23,6 +23,10 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderDetails');
     }
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
     public function getTypeOrderAttribute()
     {
        switch ($this->type) {

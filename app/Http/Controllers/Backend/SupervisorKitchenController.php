@@ -28,7 +28,7 @@ class SupervisorKitchenController extends Controller
     {
         if ($request->ajax()) {
             $details=OrderDetails::where('order_id',$request->id)->get();
-            $chefs=User::Role('طباخ')->get();
+            $chefs=User::Role('طباخ')->select(['id','name'])->get();
             return response()->json(['details'=>$details,'chefs'=>$chefs]);
         }
     }

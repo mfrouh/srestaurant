@@ -59,7 +59,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/cashier/createorder', 'Backend\CashierController@createorder')->name('cashier.createorder');
    Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
    Route::delete('/cashier/order/{id}', 'Backend\CashierController@destroy')->name('cashier.deleteorder');
-   //Supervisor Kitchen
+   //supervisor kitchen
    Route::get('/superkitchen', 'Backend\SupervisorKitchenController@index')->name('kitchen');
    Route::post('/superkitchen', 'Backend\SupervisorKitchenController@details')->name('kitchen.orderdetails');
    Route::post('/superkitchen/changeorder', 'Backend\SupervisorKitchenController@changeorder')->name('kitchen.changeorder');
@@ -67,9 +67,12 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    //chef kitchen
    Route::get('/chefkitchen', 'Backend\KitchenController@index')->name('chefkitchen');
    Route::post('/chefkitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('chefkitchen.changeorderdetails');
+   //supervisor delivery
+   Route::get('/superdelivery', 'Backend\SupervisorDeliveryController@index')->name('superdelivery');
+   Route::post('/superdelivery', 'Backend\SupervisorDeliveryController@deliverys')->name('superdelivery.deliverys');
+   Route::post('/superdelivery/selectdelivery', 'Backend\SupervisorDeliveryController@selectdelivery')->name('superdelivery.selectdelivery');
    //delivery
    Route::get('/delivery', 'Backend\DeliveryController@index')->name('delivery');
-
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 });
