@@ -33,6 +33,7 @@ class CreateOrdersTable extends Migration
             $table->string('note_for_driver')->nullable();
             $table->dateTime('delivery_start')->nullable();
             $table->dateTime('delivery_end')->nullable();
+            $table->string('delivery_code')->nullable();
             $table->timestamps();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('delivery_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
