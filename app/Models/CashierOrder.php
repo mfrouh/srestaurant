@@ -13,7 +13,7 @@ class CashierOrder extends Order
 
     public function setTypeAttribute()
     {
-        $this->attributes['type']='inrestaurant';
+        $this->attributes['type']='Inrestaurant';
     }
 
 }

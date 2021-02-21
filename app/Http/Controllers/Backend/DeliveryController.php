@@ -12,7 +12,11 @@ class DeliveryController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $orders=Order::where('type','delivery')->where('status','EndProcessing')->where('delivery_by',auth()->user()->id)->get();
+            $orders=Order::with('address')
+            ->where('type','delivery')
+            ->whereIn('status',['EndProcessing','Delivery'])
+            // ->where('delivery_by',auth()->user()->id)
+            ->get();
             return response()->json($orders);
         }
         return view('backend.delivery.index');
@@ -22,6 +26,20 @@ class DeliveryController extends Controller
         if ($request->ajax()) {
             $details=OrderDetails::where('order_id',$request->id)->get();
             return response()->json(['details'=>$details]);
+        }
+    }
+    public function startdeliveryorder(Request $request)
+    {
+        if ($request->ajax()) {
+            $details=Order::where('id',$request->id)->update(['status'=>'Delivery','delivery_start'=>now()]);
+            return response()->json(['details'=>$details]);
+        }
+    }
+    public function deliveryorder(Request $request)
+    {
+        if ($request->ajax()) {
+            $order=Order::where('id',$request->id)->where('code',$request->code)->update(['status'=>'Completed','delivery_end'=>now()]);
+            return response()->json(['details'=>$order]);
         }
     }
 }

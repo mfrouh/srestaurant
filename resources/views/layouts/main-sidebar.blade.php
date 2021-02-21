@@ -57,9 +57,19 @@
 						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
 					</li>
                     @endcan
+                    @can('مشرف المطبخ')
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">مشرف المطبخ</a>
+					</li>
+                    @endcan
                     @can('المطبخ')
                     <li class="slide">
-						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">المطبخ</a>
+						<a class="side-menu__item" href="{{ route('chefkitchen' ) }}"><span class="side-menu__label">المطبخ</a>
+					</li>
+                    @endcan
+                    @can('مشرف التوصيل للمنازل')
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('superdelivery' ) }}"><span class="side-menu__label">مشرف التوصيل للمنازل</a>
 					</li>
                     @endcan
                     @can('التوصيل للمنازل')

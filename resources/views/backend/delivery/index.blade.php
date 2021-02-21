@@ -38,6 +38,7 @@
         }
     });
     $(document).on('click','.showdetails',function(){var id=$(this).attr('data-id'); details(id);});
+    $(document).on('click','.startorder',function(){var id=$(this).attr('data-id'); storder(id);});
     getorders();
     function getorders()
     {
@@ -74,6 +75,18 @@
           }
       });
     }
+    function storder(id)
+    {
+      $.ajax({
+          type: "post",
+          url: "{{route('delivery.startdeliveryorder')}}",
+          data:{id:id},
+          dataType: "json",
+          success: function (response) {
+            getorders();
+          }
+      });
+    }
     function allorders()
     {
       orders+=
@@ -83,6 +96,8 @@
              '<th>عنوان الطلب</th>'+
              '<th>شارع الطلب</th>'+
              '<th>معلومات عن الطلب</th>'+
+             '<th>بداية التوصيل</th>'+
+             '<th>تسليم الطلب</th>'+
              '<th>التفاصيل</th>'+
            '</thead>'+
              '<tbody>'+order+'</tbody>'+
@@ -96,6 +111,8 @@
         '<td>'+el.address.address+'</td>'+
         '<td>'+el.address.street+'</td>'+
         '<td>'+el.note_for_driver+'</td>'+
+        '<td><a href="javascript:void(0);" class="btn btn-danger-gradient btn-sm startorder" data-id="'+el.id+'">بداية التوصيل</a></td>'+
+        '<td><a href="javascript:void(0);" class="btn btn-primary-gradient btn-sm deliveryorder" data-id="'+el.id+'">تسليم الطلب</a></td>'+
         '<td><a href="javascript:void(0);" class="btn btn-success-gradient btn-sm showdetails" data-id="'+el.id+'">التفاصيل</a></td></tr>';
     }
     function alldetails()

@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $table='orders';
 
-    protected $fillable=['user_id','created_by','address_id','status','type','status_order_complete','delivery_time','payment_type','total_price','discount','payment_id','phone_number','note_for_driver'];
+    protected $fillable=['user_id','created_by','address_id','status','type','status_order_complete','delivery_start','delivery_end','payment_type','total_price','discount','payment_id','phone_number','note_for_driver'];
 
     protected $appends=['type_order'];
 
@@ -30,13 +30,13 @@ class Order extends Model
     public function getTypeOrderAttribute()
     {
        switch ($this->type) {
-           case 'inrestaurant':
+           case 'Inrestaurant':
                return 'في المطعم';
                break;
-           case 'delivery':
+           case 'Delivery':
                return 'توصيل للمنازل';
                break;
-            case 'takeaway':
+            case 'Takeaway':
                return 'جاهز من المطعم';
                break;
            default:
