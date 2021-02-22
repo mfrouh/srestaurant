@@ -52,6 +52,7 @@ class MainController extends Controller
     $coupons=Coupon::count();
     $actcoupons=Coupon::active()->count();
     $inactcoupons=Coupon::inactive()->count();
+    $reviews=Review::count();
     return view('Backend.dashboard.index',
     compact('users','cashiers','deliveries',
     'superdeliveries','superchefs','chefs',
@@ -60,7 +61,7 @@ class MainController extends Controller
     'categories','actcategories','inactcategories',
     'offers','actoffers','inactoffers',
     'menus','actmenus','inactmenus',
-    'coupons','actcoupons','inactcoupons'));
+    'coupons','actcoupons','inactcoupons','reviews'));
   }
   public function reviews(Request $request)
   {
