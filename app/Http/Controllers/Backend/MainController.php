@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Coupon;
-use App\Models\Image;
 use App\Models\Menu;
 use App\Models\Offer;
 use App\Models\Order;
@@ -28,16 +27,24 @@ class MainController extends Controller
     }
     public function index()
     {
-    $users=User::count();
+    $users=User::role('مستخدم')->count();
+    $cashiers=User::role('كاشير')->count();
+    $deliveries=User::role('عامل توصيل')->count();
+    $superdeliveries=User::role('مشرف عمال التوصيل')->count();
+    $superchefs=User::role('مشرف في المطبخ')->count();
+    $chefs=User::role('طباخ')->count();
     $products=Product::count();
     $actproducts=Product::active()->count();
     $inactproducts=Product::inactive()->count();
-    $tags=Tag::count();
+   // $tags=Tag::count();
     $roles=Role::count();
     $permissions=Permission::count();
     $categories=Category::count();
     $actcategories=Category::active()->count();
     $inactcategories=Category::inactive()->count();
+    $menus=Menu::count();
+    $actmenus=Menu::active()->count();
+    $inactmenus=Menu::inactive()->count();
     $orders=Order::count();
     $offers=Offer::count();
     $actoffers=Offer::active()->count();
@@ -46,13 +53,13 @@ class MainController extends Controller
     $actcoupons=Coupon::active()->count();
     $inactcoupons=Coupon::inactive()->count();
     return view('Backend.dashboard.index',
-    compact('users',
-    'products','tags','roles',
-    'permissions','categories',
-    'actproducts','inactproducts',
-    'actcategories','inactcategories',
-    'orders',
+    compact('users','cashiers','deliveries',
+    'superdeliveries','superchefs','chefs',
+    'roles','permissions','orders',
+    'products','actproducts','inactproducts',
+    'categories','actcategories','inactcategories',
     'offers','actoffers','inactoffers',
+    'menus','actmenus','inactmenus',
     'coupons','actcoupons','inactcoupons'));
   }
   public function reviews(Request $request)

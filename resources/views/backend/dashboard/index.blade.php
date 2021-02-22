@@ -22,7 +22,6 @@
 @section('content')
 				<!-- row -->
 <div class="row row-sm">
-    {{--  @can('الاقسام')  --}}
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-primary-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -45,8 +44,6 @@
 			</div>
 		</div>
     </div>
-    {{--  @endcan
-    {{--  @can('المقالات')  --}}
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-success-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -70,8 +67,29 @@
 			</div>
 		</div>
     </div>
-    {{--  @endcan
-    @can('المستخدمين')  --}}
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-success">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد القوائم</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 ml-5 text-white">{{$menus}}</h4>
+                        </div>
+                        <div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 mr-5 ml-5 text-dark">{{$actmenus}}</h4>
+						</div>
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-danger">{{$inactmenus}}</h4>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-warning-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -88,8 +106,87 @@
 			</div>
 		</div>
     </div>
-    {{--  @endcan
-    @can('الصلاحيات')  --}}
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-warning">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد موظفي الكاشير</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$cashiers}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-success">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد عمال التوصيل</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$deliveries}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-danger">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد العمال في المطبخ</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$chefs}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-secondary-gradient">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد المشرفين علي المطبخ</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$superchefs}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+		<div class="card overflow-hidden sales-card bg-warning-gradient">
+			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+				<div class="">
+					<h6 class="mb-3 tx-12 text-white">عدد المشرفين علي عمال التوصيل</h6>
+				</div>
+				<div class="pb-0 mt-0">
+					<div class="d-flex">
+						<div class="">
+							<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$superdeliveries}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    @can('الصلاحيات')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-purple-gradient ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -106,8 +203,8 @@
 			</div>
 		</div>
     </div>
-    {{--  @endcan
-    @can('الوظائف')  --}}
+    @endcan
+    @can('الوظائف')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-info-gradient ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -124,25 +221,7 @@
 			</div>
 		</div>
     </div>
-    {{--  @endcan
-    @can('كلمات لها علاقة')  --}}
-    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-		<div class="card overflow-hidden sales-card bg-light ">
-			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-				<div class="">
-					<h6 class="mb-3 tx-12 text-dark">عدد الكلمات لها علاقة</h6>
-				</div>
-				<div class="pb-0 mt-0">
-					<div class="d-flex">
-						<div class="">
-							<h4 class="tx-20 font-weight-bold mb-1 text-dark">{{$tags}}</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </div>
-    {{--  @endcan  --}}
+    @endcan
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-secondary ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -223,6 +302,14 @@
     </div>
     <div class="col-xl-6">
         <div class="card">
+            <div class="card-header">({{$menus}}) القوائم</div>
+            <div class="card-body">
+                <canvas id="menus"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card">
             <div class="card-header">({{$offers}}) العروض</div>
             <div class="card-body">
                 <canvas id="offers"></canvas>
@@ -238,7 +325,6 @@
         </div>
     </div>
 </div>
-
   </div>
 </div>
 @endsection
@@ -249,6 +335,7 @@ var ctx1 = document.getElementById('categories').getContext('2d');
 var ctx2 = document.getElementById('products').getContext('2d');
 var ctx3 = document.getElementById('offers').getContext('2d');
 var ctx4 = document.getElementById('coupons').getContext('2d');
+var ctx5 = document.getElementById('menus').getContext('2d');
 
 var chart1 = new Chart(ctx1, {
     // The type of chart we want to create
@@ -361,6 +448,32 @@ var chart4 = new Chart(ctx4, {
         }
     }
 });
+var chart5 = new Chart(ctx5, {
+    // The type of chart we want to create
+    type: 'pie',
 
+    // The data for our dataset
+    data: {
+        labels: ['القوائم المغلقة', 'القوائم المتاحة'],
+        datasets: [{
+            label: 'القوائم',
+            backgroundColor:['red','green'],
+            borderColor: 'rgb(255, 255, 255)',
+            data: [{{$inactmenus}}, {{$actmenus}}]
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        legend: {
+            labels: {
+                // This more specific font property overrides the global property
+                fontColor: 'black',
+                fontFamily:"'Lalezar', 'cursive'",
+                fontSize:15,
+            }
+        }
+    }
+});
 </script>
 @endsection
