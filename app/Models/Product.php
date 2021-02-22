@@ -118,8 +118,8 @@ class Product extends Model
     public function  getvariantpriceafterofferAttribute()
     {
         if ($this->variants->count()!=0) {
-            $min=min($this->variants->pluck('priceafteroffer')->toArray());
-          $max=max($this->variants->pluck('priceafteroffer')->toArray());
+          $min=min($this->variants->pluck('p_a_o')->toArray());
+          $max=max($this->variants->pluck('p_a_o')->toArray());
           if ($min==$max) {
             return $min;
            }

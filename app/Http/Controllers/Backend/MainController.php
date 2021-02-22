@@ -10,10 +10,8 @@ use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Review;
-use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
@@ -36,7 +34,6 @@ class MainController extends Controller
     $products=Product::count();
     $actproducts=Product::active()->count();
     $inactproducts=Product::inactive()->count();
-   // $tags=Tag::count();
     $roles=Role::count();
     $permissions=Permission::count();
     $categories=Category::count();

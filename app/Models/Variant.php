@@ -15,31 +15,33 @@ class Variant extends Model
 
     protected $fillable=['sku','price','quantity','product_id'];
 
-    protected $appends=['price_a_offer'];
+    protected $appends=['p_a_o'];
 
     public function values()
     {
         return $this->belongsToMany('App\Models\Value', 'variant_value', 'variant_id', 'value_id');
     }
+
     public function product()
     {
         return $this->belongsTo('App\Models\Product');
     }
-    public function getPriceAofferAttribute()
+
+    public function getPAOAttribute()
     {
-       //if ($this->product->offer && $this->product->offer->isactive) {
-        //  if ($this->product->offer->type=='fixed') {
-        //      if (($this->price - $this->product->offer->value)>0) {
-        //         return $this->price - $this->product->offer->value;
-        //      }
-        //      else {
-        //         return $this->price;
-        //      }
-        //  }
-        //  if ($this->product->offer->type=='variable') {
-        //     return $this->price - (($this->price*$this->product->offer->value)/100);
-        //  }
-     //  }
+    //    if ($this->product->offer && $this->product->offer->isactive) {
+    //      if ($this->product->offer->type=='fixed') {
+    //          if (($this->price - $this->product->offer->value)>0) {
+    //             return $this->price - $this->product->offer->value;
+    //          }
+    //          else {
+    //             return $this->price;
+    //          }
+    //      }
+    //      if ($this->product->offer->type=='variable') {
+    //         return $this->price - (($this->price*$this->product->offer->value)/100);
+    //      }
+    //   }
        return $this->price;
     }
 }

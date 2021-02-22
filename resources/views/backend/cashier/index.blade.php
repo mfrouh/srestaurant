@@ -189,15 +189,17 @@
 
     function product(el)
     {
+      card='';
+      card1='<a class="btn btn-pink-gradient btn-sm addtocard float-left" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-plus"></i></a>';
+      card2='<a class="btn btn-success-gradient btn-sm float-left" href="javascript:void(0)" data-id="'+el.id+'">اختار النوع</a>';
+      if(el.variants.length==0){card=card1;}else{card=card2;}
       products+=
       ' <div class="col-xl-3 col-md-4 col-sm-6">'+
       '<div class="card">'+
         '<img class="card-img-top" height="200px" src="'+el.image_path+'">'+
         '<div class="card-body">'+
          ' <h6 class="card-title text-right">'+el.name+'</h6>'+
-         '<span>'+el.priceafteroffer+' جنية</span>'+
-          '<a class="btn btn-pink-gradient btn-sm addtocard float-left" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-plus"></i></a>'+
-        '</div>'+
+         '<span>'+el.priceafteroffer+' جنية</span>'+card+'</div>'+
      ' </div>'+
      '</div>';
     }

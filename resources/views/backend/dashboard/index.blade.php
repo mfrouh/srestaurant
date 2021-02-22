@@ -2,14 +2,7 @@
 @section('title')
     الرئيسية
 @endsection
-@section('css')
-<!--  Owl-carousel css-->
-<link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
-<!-- Maps css -->
-<link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
-@endsection
 @section('page-header')
-	<!-- breadcrumb -->
 	<div class="breadcrumb-header justify-content-between">
 		<div class="left-content">
 			<div>
@@ -17,11 +10,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- /breadcrumb -->
 @endsection
 @section('content')
-				<!-- row -->
 <div class="row row-sm">
+    @can('الاقسام')
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-primary-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -44,6 +36,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('المنتجات')
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-success-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -67,6 +61,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('القوائم')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-success">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -90,6 +86,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('المستخدمين')
 	<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-warning-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -106,6 +104,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('الموظفين')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-warning">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -186,6 +186,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('الأراء')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-primary-gradient">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -202,6 +204,7 @@
 			</div>
 		</div>
     </div>
+    @endcan
     @can('الصلاحيات')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-purple-gradient ">
@@ -238,6 +241,7 @@
 		</div>
     </div>
     @endcan
+    @can('الطلبات')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-secondary ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -254,6 +258,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('الخصومات')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-info-gradient ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -276,6 +282,8 @@
 			</div>
 		</div>
     </div>
+    @endcan
+    @can('العروض')
     <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 		<div class="card overflow-hidden sales-card bg-pink-gradient ">
 			<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
@@ -298,6 +306,7 @@
 			</div>
 		</div>
     </div>
+    @endcan
 </div>
 <div class="row">
     <div class="col-xl-6">
