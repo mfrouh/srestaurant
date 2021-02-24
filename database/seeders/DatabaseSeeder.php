@@ -17,10 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-                // \App\Models\User::factory(10)->create();
-                Setting::create(['name'=>'your website name','description'=>'your website description','logo'=>'images/logo/1.png']);
-                $roles=['سوبر ادمن','مالك','مدير','مشرف في المطبخ','مشرف عمال التوصيل','كاشير','طباخ','عامل توصيل','مستخدم'];
-                foreach ($roles as $key => $role) {Role::create(['name'=>$role]);}
+                Setting::create(['name'=>'اسم المطعم','description'=>'وصف المطعم','logo'=>'images/logo/1.png']);
+                $permissions2=['الرئيسية','مشاهدة منتج','اعدادات الموقع','الأراء','العروض','الانواع','القيم','القوائم','المنتجات','الخصومات','الاقسام','تغير كلمة المرور','الخصائص','الصلاحيات','الوظائف','المعلومات الشخصية'];
+                foreach ($permissions2 as $key => $permission) {Permission::create(['name'=>"$permission"]);}
                 $permissions=['نوع','قيمة','وظيفة','منتج','قائمة','خاصية','قسم','خصم','عرض','صلاحية'];
                 foreach ($permissions as $key => $permission) {
                     Permission::create(['name'=>"انشاء $permission"]);
@@ -28,29 +27,27 @@ class DatabaseSeeder extends Seeder
                     Permission::create(['name'=>"حذف $permission"]);
                     if (in_array($permission,['منتج','قسم','قائمة'])) {Permission::create(['name'=>"تغير حالة $permission"]); }
                  }
-                $permissions2=['المطبخ','كاشير','مشاهدة منتج','اعدادات الموقع','الأراء','العروض','الانواع','القيم','القوائم','المنتجات','الخصومات','الاقسام','تغير كلمة المرور','الخصائص','الصلاحيات','الوظائف','المعلومات الشخصية'];
-                foreach ($permissions2 as $key => $permission) {
-                    Permission::create(['name'=>"$permission"]);
-                }
-                  \App\Models\User::create(['name'=>'superadmin','email'=>'superadmin@example.com','password'=>bcrypt('12345678')])->assignRole('سوبر ادمن');
-                  \App\Models\User::create(['name'=>'owner','email'=>'owner@example.com','password'=>bcrypt('12345678')])->assignRole('مالك');
+                $roles=['سوبر ادمن','مالك','مدير','مشرف في المطبخ','مشرف عمال التوصيل','كاشير','طباخ','عامل توصيل','مستخدم'];
+                foreach ($roles as $key => $role) {Role::create(['name'=>$role])->syncPermissions(['الرئيسية','المعلومات الشخصية','تغير كلمة المرور']);}
+                  \App\Models\User::create(['name'=>'سوبر ادمن','email'=>'superadmin@example.com','password'=>bcrypt('12345678')])->assignRole('سوبر ادمن');
+                  \App\Models\User::create(['name'=>'مالك','email'=>'owner@example.com','password'=>bcrypt('12345678')])->assignRole('مالك');
                   for ($i=1; $i <= 1; $i++) {
-                    \App\Models\User::create(['name'=>"manager$i",'email'=>"manager$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مدير');
+                    \App\Models\User::create(['name'=>"مدير$i",'email'=>"manager$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مدير');
                   }
                   for ($i=1; $i <= 2; $i++) {
-                    \App\Models\User::create(['name'=>"supervisor_delivery$i",'email'=>"supervisor_delivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف عمال التوصيل');
+                    \App\Models\User::create(['name'=>"مشرف عمال التوصيل$i",'email'=>"supervisor_delivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف عمال التوصيل');
                   }
                   for ($i=1; $i <= 2; $i++) {
-                    \App\Models\User::create(['name'=>"supervisor_kitchen$i",'email'=>"supervisor_kitchen$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف في المطبخ');
+                    \App\Models\User::create(['name'=>"مشرف في المطبخ$i",'email'=>"supervisor_kitchen$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف في المطبخ');
                   }
                   for ($i=1; $i <= 8; $i++) {
-                    \App\Models\User::create(['name'=>"cashier$i",'email'=>"cashier$i@example.com",'password'=>bcrypt('12345678')])->assignRole('كاشير');
+                    \App\Models\User::create(['name'=>"كاشير$i",'email'=>"cashier$i@example.com",'password'=>bcrypt('12345678')])->assignRole('كاشير');
                   }
                   for ($i=1; $i <= 8; $i++) {
-                    \App\Models\User::create(['name'=>"chef$i",'email'=>"chef$i@example.com",'password'=>bcrypt('12345678')])->assignRole('طباخ');
+                    \App\Models\User::create(['name'=>"طباخ$i",'email'=>"chef$i@example.com",'password'=>bcrypt('12345678')])->assignRole('طباخ');
                   }
                   for ($i=1; $i <= 8; $i++) {
-                    \App\Models\User::create(['name'=>"delivery$i",'email'=>"delivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('عامل توصيل');
+                    \App\Models\User::create(['name'=>"عامل توصيل$i",'email'=>"delivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('عامل توصيل');
                   }
                 \App\Models\Category::factory(10)->create();
                 \App\Models\Menu::factory(10)->create();

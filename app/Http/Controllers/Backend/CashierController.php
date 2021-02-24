@@ -14,7 +14,7 @@ class CashierController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','permission:كاشير']);
+        $this->middleware(['auth','role:كاشير']);
     }
     public function index(Request $request)
     {

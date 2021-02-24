@@ -12,7 +12,7 @@ class SupervisorKitchenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','permission:مشرف المطبخ']);
+        $this->middleware(['auth','role:مشرف في المطبخ']);
     }
 
     public function index(Request $request)

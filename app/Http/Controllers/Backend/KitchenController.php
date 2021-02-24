@@ -12,7 +12,7 @@ class KitchenController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware(['auth','permission:المطبخ']);
+        $this->middleware(['auth','role:طباخ']);
     }
 
     public function index(Request $request)

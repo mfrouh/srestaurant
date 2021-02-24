@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','role:عامل توصيل']);
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {
             $orders=Order::with('address')
             ->where('type','delivery')
             ->whereIn('status',['EndProcessing','Delivery'])
-            // ->where('delivery_by',auth()->user()->id)
+            ->where('delivery_by',auth()->user()->id)
             ->get();
             return response()->json($orders);
         }

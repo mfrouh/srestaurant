@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class SupervisorDeliveryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','role:مشرف عمال التوصيل']);
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {

@@ -52,31 +52,31 @@
 						<a class="side-menu__item" href="{{ route('employee.index') }}"><span class="side-menu__label">الموظفين</a>
 					</li>
                     @endcan
-                    @can('كاشير')
+                    @if (auth()->user()->HasRole('كاشير'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
 					</li>
-                    @endcan
-                    @can('مشرف المطبخ')
+                    @endif
+                    @if (auth()->user()->HasRole('مشرف في المطبخ'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">مشرف المطبخ</a>
 					</li>
-                    @endcan
-                    @can('المطبخ')
+                    @endif
+                    @if (auth()->user()->HasRole('طباخ'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('chefkitchen' ) }}"><span class="side-menu__label">المطبخ</a>
 					</li>
-                    @endcan
-                    @can('مشرف التوصيل للمنازل')
+                    @endif
+                    @if (auth()->user()->HasRole('مشرف عمال التوصيل'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('superdelivery' ) }}"><span class="side-menu__label">مشرف التوصيل للمنازل</a>
 					</li>
-                    @endcan
-                    @can('التوصيل للمنازل')
+                    @endif
+                    @if (auth()->user()->HasRole('عامل توصيل'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('delivery') }}"><span class="side-menu__label">التوصيل للمنازل</a>
 					</li>
-                    @endcan
+                    @endif
                     @can('المنتجات')
                     <li class="slide">
                         <a class="side-menu__item" href="{{ route('product.index' ) }}"><span class="side-menu__label">المنتجات</a>
