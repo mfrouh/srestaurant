@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class KitchenController extends Controller
 {
@@ -14,11 +15,19 @@ class KitchenController extends Controller
     {
         $this->middleware(['auth','role:طباخ']);
     }
-
+    public function history(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = OrderDetails::with(['order:id,type,created_at','product'])->where('created_by',auth()->user()->id)->select('*');
+            return DataTables::of($data)
+                    ->make(true);
+        }
+        return view('backend.kitchen.history');
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $orders=OrderDetails::with(['order:id,type','product'])->where('created_by',auth()->user()->id)->whereIn('status',['Pending','Prepare'])->latest()->take(12)->get();
+            $orders=OrderDetails::with(['order:id,type,created_at','product'])->where('created_by',auth()->user()->id)->whereIn('status',['Pending','Prepare'])->latest()->take(12)->get();
             return response()->json($orders);
         }
         return view('backend.kitchen.index');

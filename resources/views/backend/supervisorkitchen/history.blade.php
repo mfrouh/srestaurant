@@ -18,7 +18,7 @@
 @endsection
 @section('content')
 <div class="card">
-    <div class="card-header">العروض</div>
+    <div class="card-header">الطلبات</div>
     <div class="card-body">
         <table class="table text-center data-table">
           <thead>

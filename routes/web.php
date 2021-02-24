@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // $pdf = App::make('dompdf.wrapper');
-    // $pdf->loadview('welcome');
-    // return $pdf->stream();
     return view('welcome');
 });
 Auth::routes();
@@ -69,6 +66,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    //chef kitchen
    Route::get('/chefkitchen', 'Backend\KitchenController@index')->name('chefkitchen');
    Route::post('/chefkitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('chefkitchen.changeorderdetails');
+   Route::get('/chefkitchen/history', 'Backend\KitchenController@history')->name('chefkitchen.history');
    //supervisor delivery
    Route::get('/superdelivery', 'Backend\SupervisorDeliveryController@index')->name('superdelivery');
    Route::post('/superdelivery', 'Backend\SupervisorDeliveryController@deliverys')->name('superdelivery.deliverys');
