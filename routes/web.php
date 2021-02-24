@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -79,4 +77,3 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 });
-Route::get('/home', 'HomeController@index')->name('home');

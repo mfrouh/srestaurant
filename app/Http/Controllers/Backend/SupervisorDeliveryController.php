@@ -16,7 +16,7 @@ class SupervisorDeliveryController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-         $orders=Order::with('address')->where('type','delivery')->where('status','EndProcessing')->get();
+         $orders=Order::with('address')->OrwhereNull('superdelivery_by')->Orwhere('superdelivery_by',auth()->user()->id)->where('type','delivery')->where('status','EndProcessing')->get();
          return response()->json($orders);
         }
         return view('backend.supervisordelivery.index');
@@ -33,6 +33,7 @@ class SupervisorDeliveryController extends Controller
     {
         if ($request->ajax()) {
            Order::where('id',$request->id)->update(['delivery_by'=>$request->delivery]);
+           Order::where('id',$request->id)->where('superdelivery_by',null)->update(['superdelivery_by'=>auth()->user()->id]);
            return response()->json(['data'=>$request->id]);
         }
     }

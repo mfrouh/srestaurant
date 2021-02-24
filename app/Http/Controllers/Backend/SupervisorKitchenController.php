@@ -18,7 +18,7 @@ class SupervisorKitchenController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $orders=Order::whereIn('status',['Pending','Processing'])->latest()->take(12)->get();
+            $orders=Order::OrwhereNull('superkitchen_by')->Orwhere('superkitchen_by',auth()->user()->id)->whereIn('status',['Pending','Processing'])->latest()->take(12)->get();
             return response()->json($orders);
         }
         return view('backend.supervisorkitchen.index');
@@ -43,6 +43,8 @@ class SupervisorKitchenController extends Controller
     {
         if ($request->ajax()) {
            OrderDetails::where('id',$request->id)->update(['created_by'=>$request->chef]);
+           $orderid=OrderDetails::where('id',$request->id)->first()->order_id;
+           Order::where('id',$orderid)->where('superkitchen_by',null)->update(['superkitchen_by'=>auth()->user()->id]);
            return response()->json(['data'=>'changed']);
         }
     }
