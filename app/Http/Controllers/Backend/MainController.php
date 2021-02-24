@@ -77,9 +77,14 @@ class MainController extends Controller
          $endprocessingorders=Order::where('status','Endprocessing')->count();
          $deliveryorders=Order::where('status','Delivery')->count();
          $completedorders=Order::where('status','Completed')->count();
+         $worders=Order::where('status','Completed')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+         $dorders=Order::where('status','Completed')->whereDay('created_at', now())->count();
+         $morders=Order::where('status','Completed')->whereMonth('created_at', now())->count();
+         $yorders=Order::where('status','Completed')->whereYear('created_at', now())->count();
          $data=array_merge($data,['orders'=>$orders,'corders'=>$corders,'inrestorders'=>$inrestorders,'dlorders'=>$dlorders,
-       'tkorders'=>$tkorders,'deliveryorders'=>$deliveryorders,'pendingorders'=>$pendingorders,
-       'processingorders'=>$processingorders,'endprocessingorders'=>$endprocessingorders,'completedorders'=>$completedorders]);
+         'tkorders'=>$tkorders,'deliveryorders'=>$deliveryorders,'pendingorders'=>$pendingorders,
+         'processingorders'=>$processingorders,'endprocessingorders'=>$endprocessingorders,'completedorders'=>$completedorders
+        ,'worders'=>$worders,'dorders'=>$dorders,'morders'=>$morders,'yorders'=>$yorders]);
        }
        if (auth()->user()->can('العروض')) {
        $offers=Offer::count();
