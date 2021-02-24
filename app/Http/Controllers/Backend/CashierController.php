@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CashierController extends Controller
 {
@@ -37,6 +39,27 @@ class CashierController extends Controller
        return view('backend.cashier.index',compact('categories','menus'));
     }
 
+    public function history(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Order::where('created_by',auth()->user()->id)->selection();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn='';
+                        $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm details"  data-id="'.$row->id.'">التفاصيل</a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('backend.cashier.history');
+    }
+    public function order_details(Request $request)
+    {
+       $orderDetails=OrderDetails::with('product')->where('order_id',$request->id)->get();
+       return response()->json(['details'=>$orderDetails]);
+    }
     public function createorder(Request $request,Cart $cart)
     {
        $product=Product::findOrfail($request->id);

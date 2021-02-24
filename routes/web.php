@@ -34,6 +34,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::resource('attribute', 'Backend\AttributeController')->except(['edit','create']);
    Route::resource('value', 'Backend\ValueController')->except(['edit','create']);
    Route::resource('variant', 'Backend\VariantController')->except(['edit','create']);
+   Route::post('/order/order_details', 'Backend\OrderController@order_details')->name('order.orderdetails');
    //employee  roles
    Route::get('employee/roles', 'Backend\EmployeeController@roles')->name('employee.roles');
    //set permissions to role
@@ -56,12 +57,15 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/cashier', 'Backend\CashierController@index')->name('cashier');
    Route::get('/cashier/createorder', 'Backend\CashierController@createorder')->name('cashier.createorder');
    Route::get('/cashier/order', 'Backend\CashierController@order')->name('cashier.order');
+   Route::get('/cashier/history', 'Backend\CashierController@history')->name('cashier.history');
+   Route::post('/cashier/orderdetails', 'Backend\CashierController@order_details')->name('cashier.orderdetails');
    Route::delete('/cashier/order/{id}', 'Backend\CashierController@destroy')->name('cashier.deleteorder');
    //supervisor kitchen
    Route::get('/superkitchen', 'Backend\SupervisorKitchenController@index')->name('kitchen');
    Route::post('/superkitchen', 'Backend\SupervisorKitchenController@details')->name('kitchen.orderdetails');
    Route::post('/superkitchen/changeorder', 'Backend\SupervisorKitchenController@changeorder')->name('kitchen.changeorder');
    Route::post('/superkitchen/selectchef', 'Backend\SupervisorKitchenController@selectchef')->name('kitchen.selectchef');
+   Route::get('/superkitchen/history', 'Backend\SupervisorKitchenController@history')->name('kitchen.history');
    //chef kitchen
    Route::get('/chefkitchen', 'Backend\KitchenController@index')->name('chefkitchen');
    Route::post('/chefkitchen/changeorderdetails', 'Backend\KitchenController@changeorderdetails')->name('chefkitchen.changeorderdetails');
@@ -69,11 +73,14 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/superdelivery', 'Backend\SupervisorDeliveryController@index')->name('superdelivery');
    Route::post('/superdelivery', 'Backend\SupervisorDeliveryController@deliverys')->name('superdelivery.deliverys');
    Route::post('/superdelivery/selectdelivery', 'Backend\SupervisorDeliveryController@selectdelivery')->name('superdelivery.selectdelivery');
+   Route::get('/superdelivery/history', 'Backend\SupervisorDeliveryController@history')->name('superdelivery.history');
+   Route::post('/superdelivery/orderdetails', 'Backend\SupervisorDeliveryController@order_details')->name('superdelivery.orderdetails');
    //delivery
    Route::get('/delivery', 'Backend\DeliveryController@index')->name('delivery');
    Route::post('/delivery', 'Backend\DeliveryController@details')->name('delivery.orderdetails');
    Route::post('/delivery/startdeliveryorder', 'Backend\DeliveryController@startdeliveryorder')->name('delivery.startdeliveryorder');
    Route::post('/delivery/deliveryorder', 'Backend\DeliveryController@deliveryorder')->name('delivery.deliveryorder');
+   Route::get('/delivery/history', 'Backend\DeliveryController@history')->name('delivery.history');
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
 });

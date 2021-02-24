@@ -56,25 +56,40 @@
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('cashier' ) }}"><span class="side-menu__label">كاشير</a>
 					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('cashier.history' ) }}"><span class="side-menu__label">الطلبات السابقة</a>
+					</li>
                     @endif
                     @if (auth()->user()->HasRole('مشرف في المطبخ'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('kitchen' ) }}"><span class="side-menu__label">مشرف المطبخ</a>
+					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('kitchen.history' ) }}"><span class="side-menu__label">الطلبات السابقة</a>
 					</li>
                     @endif
                     @if (auth()->user()->HasRole('طباخ'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('chefkitchen' ) }}"><span class="side-menu__label">المطبخ</a>
 					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('chefkitchen.history' ) }}"><span class="side-menu__label">الطلبات السابقة</a>
+					</li>
                     @endif
                     @if (auth()->user()->HasRole('مشرف عمال التوصيل'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('superdelivery' ) }}"><span class="side-menu__label">مشرف التوصيل للمنازل</a>
 					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('superdelivery.history' ) }}"><span class="side-menu__label">الطلبات السابقة</a>
+					</li>
                     @endif
                     @if (auth()->user()->HasRole('عامل توصيل'))
                     <li class="slide">
 						<a class="side-menu__item" href="{{ route('delivery') }}"><span class="side-menu__label">التوصيل للمنازل</a>
+					</li>
+                    <li class="slide">
+						<a class="side-menu__item" href="{{ route('delivery.history' ) }}"><span class="side-menu__label">الطلبات السابقة</a>
 					</li>
                     @endif
                     @can('المنتجات')

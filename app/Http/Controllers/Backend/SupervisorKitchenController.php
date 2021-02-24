@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class SupervisorKitchenController extends Controller
 {
@@ -18,16 +19,31 @@ class SupervisorKitchenController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $orders=Order::OrwhereNull('superkitchen_by')->Orwhere('superkitchen_by',auth()->user()->id)->whereIn('status',['Pending','Processing'])->latest()->take(12)->get();
+            $orders=Order::whereIn('status',['Pending','Processing'])->whereNull('superkitchen_by')->Orwhere('superkitchen_by',auth()->user()->id)->latest()->take(12)->get();
             return response()->json($orders);
         }
         return view('backend.supervisorkitchen.index');
     }
-
+    public function history(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Order::where('superkitchen_by',auth()->user()->id)->selection();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn='';
+                        $btn = '<a href="javascript:void(0);" class="edit btn btn-primary m-1 btn-sm details"  data-id="'.$row->id.'">التفاصيل</a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('backend.supervisorkitchen.history');
+    }
     public function details(Request $request)
     {
         if ($request->ajax()) {
-            $details=OrderDetails::where('order_id',$request->id)->get();
+            $details=OrderDetails::with('product')->where('order_id',$request->id)->get();
             $chefs=User::Role('طباخ')->select(['id','name'])->get();
             return response()->json(['details'=>$details,'chefs'=>$chefs]);
         }

@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Order::select('*');
+            $data = Order::selection();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -39,9 +39,9 @@ class OrderController extends Controller
        return response()->json(['data'=>'success created'],200);
     }
 
-    public function order_details($id)
+    public function order_details(Request $request)
     {
-       $orderDetails=OrderDetails::where('order_id',$id)->get();
-       return view('Backend.main.order_details',compact('orderDetails'));
+       $orderDetails=OrderDetails::with('product')->where('order_id',$request->id)->get();
+       return response()->json(['details'=>$orderDetails]);
     }
 }

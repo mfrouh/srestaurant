@@ -51,7 +51,7 @@
       var table = $('.data-table').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('order.index') }}",
+          ajax: "{{ route('delivery.history') }}",
           columns: [
               {data: 'id', name: 'id'},
               {data: 'type_order', name: 'type'},
@@ -75,7 +75,7 @@
    {
     $.ajax({
         type: "post",
-        url: "{{route('order.orderdetails')}}",
+        url: "{{route('delivery.orderdetails')}}",
         data: {id:id},
         dataType: "json",
         success: function (response) {

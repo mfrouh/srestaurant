@@ -13,7 +13,7 @@ class Order extends Model
 
     protected $fillable=['user_id','created_by','address_id','status','type','status_order_complete','delivery_start','delivery_end','payment_type','total_price','discount','payment_id','phone_number','note_for_driver'];
 
-    protected $appends=['type_order'];
+    protected $appends=['type_order','status_order','create'];
 
     public function user()
     {
@@ -26,6 +26,15 @@ class Order extends Model
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+    public function getCreateAttribute()
+    {
+        return $this->created_at->diffforhumans();
+    }
+
+    public function ScopeSelection($q)
+    {
+     $q->select(['id','total_price','status','type','discount','created_at']);
     }
     public function getTypeOrderAttribute()
     {
@@ -41,6 +50,29 @@ class Order extends Model
                break;
            default:
                return 'في المطعم';
+               break;
+       }
+    }
+    public function getStatusOrderAttribute()
+    {
+       switch ($this->status) {
+           case 'Pending':
+               return 'لم يطهي بعد';
+               break;
+           case 'Processing':
+               return 'يطهيي الان';
+               break;
+           case 'EndProcessing':
+               return 'اكتمال الطهي';
+               break;
+           case 'Delivery':
+               return 'في الطريق';
+               break;
+           case 'Completed':
+               return 'اكتمال الطلب';
+               break;
+           default:
+               return 'لم يطهي بعد';
                break;
        }
     }
