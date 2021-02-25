@@ -35,10 +35,10 @@ class DatabaseSeeder extends Seeder
                     \App\Models\User::create(['name'=>"مدير$i",'email'=>"manager$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مدير');
                   }
                   for ($i=1; $i <= 2; $i++) {
-                    \App\Models\User::create(['name'=>"مشرف عمال التوصيل$i",'email'=>"supervisor_delivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف عمال التوصيل');
+                    \App\Models\User::create(['name'=>"مشرف عمال التوصيل$i",'email'=>"superdelivery$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف عمال التوصيل');
                   }
                   for ($i=1; $i <= 2; $i++) {
-                    \App\Models\User::create(['name'=>"مشرف في المطبخ$i",'email'=>"supervisor_kitchen$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف في المطبخ');
+                    \App\Models\User::create(['name'=>"مشرف في المطبخ$i",'email'=>"superkitchen$i@example.com",'password'=>bcrypt('12345678')])->assignRole('مشرف في المطبخ');
                   }
                   for ($i=1; $i <= 8; $i++) {
                     \App\Models\User::create(['name'=>"كاشير$i",'email'=>"cashier$i@example.com",'password'=>bcrypt('12345678')])->assignRole('كاشير');
