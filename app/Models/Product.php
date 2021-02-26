@@ -38,11 +38,15 @@ class Product extends Model
     }
     public function ScopeActive($q)
     {
-     return  $q->where('status','active');
+     return  $q->where('status','active')
+     ->wherehas('category',function($quary){ $quary->where('status','active');})
+     ->wherehas('menu',function($quary){ $quary->where('status','active');});
     }
     public function ScopeInActive($q)
     {
-      return  $q->where('status','inactive');
+      return  $q->where('status','inactive')
+      ->wherehas('category',function($quary){ $quary->where('status','inactive');})
+      ->wherehas('menu',function($quary){ $quary->where('status','inactive');});
     }
     public function getstatAttribute()
     {
