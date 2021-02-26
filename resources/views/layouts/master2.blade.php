@@ -22,10 +22,15 @@
             font-family: 'Lalezar', cursive;
             /* font-family: 'Rakkas', cursive; */
           }
+          .card {
+           box-shadow: 0px 0px 0px 0 #dadee8;
+         }
         </style>
 	</head>
 
-	<body class="main-body bg-primary-transparent">
+	<body class="main-body bg-primary-transparent" style=" background-image: url({{URL::asset('/images/logo/bgrest2.jpg')}});
+    background-repeat: no-repeat;
+    background-size: cover;">
 		<!-- Loader -->
 		<div id="global-loader">
 			<img src="{{URL::asset('assets/img/loader.svg')}}" class="loader-img" alt="Loader">
