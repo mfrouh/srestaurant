@@ -45,8 +45,8 @@ class Product extends Model
     public function ScopeInActive($q)
     {
       return  $q->where('status','inactive')
-      ->wherehas('category',function($quary){ $quary->where('status','inactive');})
-      ->wherehas('menu',function($quary){ $quary->where('status','inactive');});
+      ->Orwherehas('category',function($quary){ $quary->where('status','inactive');})
+      ->Orwherehas('menu',function($quary){ $quary->where('status','inactive');});
     }
     public function getstatAttribute()
     {
