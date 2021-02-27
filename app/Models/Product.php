@@ -54,8 +54,8 @@ class Product extends Model
     }
     // public function setImageAttribute($value)
     // {
-    //     Image::make($value)->resize(500,500)->save('images/products/'.$this->name.$this->catgory_id.'.png');
-    //     $this->attributes['image']='images/products/'.$this->name.$this->catgory_id.'.png';
+    //     Image::make($value)->resize(500,500)->save('images/products/'.$this->name.$this->category_id.'.png');
+    //     $this->attributes['image']='images/products/'.$this->name.$this->category_id.'.png';
     // }
     public function gallery()
     {

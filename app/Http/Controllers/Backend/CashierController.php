@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Cart\Cart as Cart;
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Order;
@@ -65,6 +66,11 @@ class CashierController extends Controller
        $product=Product::findOrfail($request->id);
        $cart->CreateORUpdate($product->id,$product->sku);
        return response()->json($cart->content());
+    }
+    public function getattribute(Request $request)
+    {
+       $attributes=Attribute::with('values')->where('product_id',$request->id)->get(['id','product_id','name']);
+       return response()->json(['attributes'=> $attributes]);
     }
 
     public function order(Cart $cart)

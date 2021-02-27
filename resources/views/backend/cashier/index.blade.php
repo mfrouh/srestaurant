@@ -61,6 +61,7 @@
         </div>
     </div>
 </div>
+<x-selectvariant/>
 @endsection
 @section('js')
   <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
@@ -89,9 +90,38 @@
             }
         });
     });
-
+    $(document).on('click','.selectvariant',function(){
+        selvariant($(this).attr('data-id'))
+    });
     cashier();getorders();
 
+    function selvariant(id)
+    {
+        $.ajax({
+            type: "post",
+            url: "{{route('cashier.getattribute')}}",
+            data: {id:id},
+            dataType: "json",
+            success: function (response) {
+                $('#selectvariant').modal('toggle');
+                att='';vals='';
+                response.attributes.forEach(element => {
+                     element.values.forEach(el => {
+                        vals+='<div class="col-4">'+
+                           '<input type="radio" class="p-1" name="'+element.id+'" value="'+el.id+'" required>'+el.value+'</div>';
+                     });
+                     att+='<p>'+element.name+'</p><div class="row text-center">'+vals+'</div>';
+                    //  '<div class="modal-footer text-center">'+
+                    //      '<div class="col-12">'+
+                    //        '<a href="javascript:void(0)" class="btn btn-success btn-sm addtocard" data-id='+element.product_id+'>اضافة الي السلة</a>'+
+                    //      '</div>'+
+                    //   '</div>';
+                });
+                $('.attributes').html(att);
+
+            }
+        });
+    }
     function cashier()
     {
         $.ajax({
@@ -191,7 +221,7 @@
     {
       card='';
       card1='<a class="btn btn-pink-gradient btn-sm addtocard float-left" href="javascript:void(0)" data-id="'+el.id+'"><i class="fa fa-plus"></i></a>';
-      card2='<a class="btn btn-success-gradient btn-sm float-left" href="javascript:void(0)" data-id="'+el.id+'">اختار النوع</a>';
+      card2='<a class="btn btn-success-gradient btn-sm selectvariant float-left" href="javascript:void(0)" data-id="'+el.id+'">اختار النوع</a>';
       if(el.variants.length==0){card=card1;}else{card=card2;}
       products+=
       ' <div class="col-xl-3 col-md-4 col-sm-6">'+

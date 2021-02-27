@@ -57,6 +57,7 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/cashier/history', 'Backend\CashierController@history')->name('cashier.history');
    Route::post('/cashier/orderdetails', 'Backend\CashierController@order_details')->name('cashier.orderdetails');
    Route::delete('/cashier/order/{id}', 'Backend\CashierController@destroy')->name('cashier.deleteorder');
+   Route::post('/cashier/getattribute', 'Backend\CashierController@getattribute')->name('cashier.getattribute');
    //supervisor kitchen
    Route::get('/superkitchen', 'Backend\SupervisorKitchenController@index')->name('kitchen');
    Route::post('/superkitchen', 'Backend\SupervisorKitchenController@details')->name('kitchen.orderdetails');
@@ -81,4 +82,8 @@ Route::group(['prefix'=>'backend','middleware' => ['auth']], function () {
    Route::get('/delivery/history', 'Backend\DeliveryController@history')->name('delivery.history');
    //reviews
    Route::get('/review', 'Backend\MainController@reviews')->name('review.index');
+   //notifications
+   Route::get('/notifications', 'Backend\NotificationController@index')->name('notifications.index');
+   Route::delete('/notifications/{id}', 'Backend\NotificationController@destroy')->name('notifications.destroy');
+   Route::post('/notifications', 'Backend\NotificationController@makeread')->name('notifications.makeread');
 });
